@@ -55,6 +55,14 @@ body {
     right: 10px;
 }
 
+.settings-menu {
+    height: 10vh;
+    width: 10vw;
+    border-radius: 0.75rem;
+    border-color: #8B7CFF;
+    border-width: 2px;
+}
+
 .credits {
     position: absolute;
     bottom: 10px;
