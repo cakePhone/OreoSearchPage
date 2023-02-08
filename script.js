@@ -7,3 +7,8 @@ function search() {
 
 document.addEventListener("keypress", function(event) {
     if (event.keyCode == 13) {search()}});
+
+function openSettings() {
+    console.log("settings opened")
+    return
+}

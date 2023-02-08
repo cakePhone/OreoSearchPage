@@ -8,8 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/png">
     <script src="script.js"></script>
-</head>
+    </head>
 <body>
+    <div class="settings">
+        <div class="settings-button">
+            <img src="assets/icons/settings-01.svg" id="settings-drawable" onclick="openSettings()"/>
+        </div>
+    </div>
     <div class="logo">
         <h1 class="logo-text">OreoSearch</h1>
     </div>
@@ -17,7 +22,11 @@
         <div class="search-icon">
             <img id="search-drawable" src="assets/icons/search-sm.svg"/>
         </div>
-        <input type="text" id="search-input" placeholder="Search">
+        <input type="text" id="search-input" placeholder="Search" autofocus>
+    </div>
+    <div class="credits">
+        <p class="credit-text">Powered by <a class="credit-text" href="https://pages.github.com/">Github Pages</a></p>
+        <a class="credit-text" href="https://github.com/cakePhone/OreoSearchPage">Hosted on my Github Repo</a>
     </div>
 </body>
 </html>

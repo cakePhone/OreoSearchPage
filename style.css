@@ -49,3 +49,21 @@ body {
 #search-input:focus {
     outline: none;
 }
+
+.settings {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.settings-button {
+
+}
+
+.credits {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+}
