@@ -65,8 +65,6 @@ body {
     position: absolute;
     bottom: 10px;
     left: 10px;
-    display: flex;
-    flex-direction: column;
 }
 
 .credit-text {
