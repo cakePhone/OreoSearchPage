@@ -2,7 +2,7 @@ function search() {
     var input_value = document.getElementById("search-input").value
     console.log(input_value)
     if (/^\s*$/.test(input_value)) return
-    if (input_value.startsWith("https://") || input_value.startsWith("http://")) {window.location.assign(encodeURIComponent(input_value))}
+    if (input_value.startsWith("https://") || input_value.startsWith("http://")) {window.location.assign(input_value)}
     else {window.location.assign("https://duckduckgo.com/?q=" + encodeURIComponent(input_value))}
 }
 
