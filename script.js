@@ -20,3 +20,18 @@ function settingsToggle() {
         console.log("settings closed")
     }
 }
+
+function applyStyles() {
+    document.body.style.color = localStorage.getItem("backgroundColor")
+    for (var i = 0; i < document.getElementsByClassName("text").length; i++) {
+        document.getElementsByClassName("text")[i].style.color = localStorage.getItem("accentColor")
+    }
+}
+
+function addStyleValuesToLocalStorage() {
+    if (localStorage.getItem("wasUsedBefore") == null) {
+        localStorage.setItem("wasUsedBefore", true)
+        localStorage.setItem("accentColor", "#000000")
+        localStorage.setItem("backgroundColor", "#ffffff")
+    }
+}
