@@ -12,9 +12,9 @@
 <body>
     <div class="settings">
         <div class="settings-button">
-            <img src="assets/icons/settings-01.svg" id="settings-drawable" onclick="openSettings()"/>
+            <img src="assets/icons/settings-01.svg" id="settings-drawable" onclick="settingsToggle()"/>
         </div>
-        <div class="settings-menu">
+        <div id="settings-menu" class="invisible">
             <div class="accent-color-box settings-items">
                 <p class="color-setting-text text settings-item-text">Accent Color:</p>
                 <input class="color-input" type="color" name="accent" id="accent-color-input">
