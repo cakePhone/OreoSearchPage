@@ -9,8 +9,17 @@ function search() {
     var input_value = document.getElementById("search-input").value
     console.log(input_value)
     if (/^\s*$/.test(input_value)) return
-    if (input_value.includes("https://") || input_value.includes("http://") || input_value.includes(".com")) {window.location.assign(input_value)}
-    else {window.location.assign("https://duckduckgo.com/?q=" + encodeURIComponent(input_value))}
+    const isValidUrl = urlString=> {
+        var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+      '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+    return !!urlPattern.test(urlString);
+    }
+    if (isValidUrl(input_value)) {window.location.replace(input_value)}
+    else {window.location.replace("https://duckduckgo.com/?q=" + encodeURIComponent(input_value))}
 }
 
 document.addEventListener("keypress", function(event) {
