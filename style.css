@@ -111,6 +111,15 @@ body {
     width: 100%;
 }
 
+#search-engines {
+    background-color: rgba(var(--accent-color), 0.2);
+    outline: none;
+    border: none;
+    color: rgba(var(--accent-color));
+    padding: 5px;
+    border-radius: 0.5rem;
+}
+
 .color-input {
     border: 0;
     padding: 0px;
