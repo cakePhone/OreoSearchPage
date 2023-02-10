@@ -15,7 +15,7 @@ OreoSearch has the following feautures:
   - Brave
 
 To request features, open an issue or contact me:
-+ Telegram: https://t.me/OrioOreohttps://t.me/OrioOreo
++ Telegram: https://t.me/OrioOreo
 
 ## Use
 You can use this search page like any other. To access the different features, just click the settings button in the top right corner. Enjoy!
