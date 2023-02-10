@@ -60,24 +60,32 @@ function applyStyles() {
     var storedBackgroundColor = localStorage.getItem("backgroundColor")
     const accentInput = document.getElementById("accent-color-input")
     const backgroundInput = document.getElementById("background-color-input")
+    var accentInputEventListener
+    var backgroundInputEventListener
 
     // All the accent color shenanigans
     root.style.setProperty("--accent-color", storedAccentColor)
     accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
-    accentInput.addEventListener("change", () => {
-        localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
-        console.log("Accent Changed")
-        applyStyles()
-    })
+    if (!accentInputEventListener) {
+        accentInput.addEventListener("change", () => {
+            localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
+            console.log("Accent Changed")
+            applyStyles()
+        })
+        accentInputEventListener = true
+    }
 
     // All the background color shenanigans
     root.style.setProperty("--background-color", storedBackgroundColor)
     backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
-    backgroundInput.addEventListener("change", () => {
-        localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
-        console.log("Background Changed")
-        applyStyles()
-    })
+    if (!backgroundInputEventListener) {
+        backgroundInput.addEventListener("change", () => {
+            localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
+            console.log("Background Changed")
+            applyStyles()
+        })
+        backgroundInputEventListener = true
+    }
 }
 
 function addStyleValuesToLocalStorage() {
