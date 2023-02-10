@@ -9,6 +9,7 @@ function search() {
 document.addEventListener("keypress", function(event) {
     if (event.keyCode == 13) {search()}});
 
+// Basically takes care of the stuffs when you click the settings button
 function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
         document.getElementById("settings-menu").classList.remove("invisible")
@@ -22,7 +23,7 @@ function settingsToggle() {
     console.log(document.getElementById("accent-color-input").value)
 }
 
-// thx to Tim Down at on Stack Overflow for these functions
+// Thx to Tim Down at on Stack Overflow for these functions
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -40,13 +41,24 @@ function rgbToHex(r, g, b) {
 function applyStyles() {
     var root = document.querySelector(":root")
     var storedAccentColor = localStorage.getItem("accentColor")
+    var storedBackgroundColor = localStorage.getItem("backgroundColor")
     const accentInput = document.getElementById("accent-color-input")
-    root.style.setProperty("--accent-color", localStorage.getItem("accentColor"))
+    const backgroundInput = document.getElementById("background-color-input")
+    // All the accent color shenanigans
+    root.style.setProperty("--accent-color", storedAccentColor)
     accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
-    console.log(`RGB: ${hexToRgb(accentInput.value).r}, ${hexToRgb(accentInput.value).g}, ${hexToRgb(accentInput.value).b}`)
-    accentInput.addEventListener("change", (e) => {
+    accentInput.addEventListener("change", () => {
         localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
         console.log("Accent Changed")
+        applyStyles()
+    })
+
+    // All the background color shenanigans
+    root.style.setProperty("--background-color", storedBackgroundColor)
+    backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
+    backgroundInput.addEventListener("change", () => {
+        localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
+        console.log("Background Changed")
         applyStyles()
     })
 }

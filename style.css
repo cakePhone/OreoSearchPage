@@ -86,10 +86,13 @@ body {
 #settings-menu {
     height: fit-content;
     max-height: 50vh;
+    margin-top: 10px;
     width: fit-content;
     border-radius: 0.75rem;
     border-color: rgba(var(--accent-color));
-    border-width: 2px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: rgba(var(--accent-color), 0.1);
 }
 
 .settings-items {
