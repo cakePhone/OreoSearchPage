@@ -97,7 +97,6 @@ function applySettings() {
     }
 
     // All the Search Engine shenanigans
-    console.log(searchEngineSelect.value)
     searchEngineSelect.value = storedSearchEngine
     document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
     if(!searchEngineInputEventListener) {
