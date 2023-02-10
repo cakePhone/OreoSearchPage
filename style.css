@@ -94,9 +94,6 @@ body {
     padding: 10px 10px;
     width: fit-content;
     border-radius: 0.75rem;
-    border-color: rgba(var(--accent-color));
-    border-width: 1px;
-    border-style: solid;
     background-color: rgba(var(--accent-color), 0.2);
 }
 
