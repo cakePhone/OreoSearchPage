@@ -79,20 +79,25 @@ body {
 }
 
 .settings-button {
-    height: fit-content;
-    width: fit-content;
+    height: 24px;
+    width: 24px;
+}
+
+.icons {
+    stroke: rgba(var(--accent-color));
 }
 
 #settings-menu {
     height: fit-content;
     max-height: 50vh;
     margin-top: 10px;
+    padding: 10px 10px;
     width: fit-content;
     border-radius: 0.75rem;
     border-color: rgba(var(--accent-color));
     border-width: 1px;
     border-style: solid;
-    background-color: rgba(var(--accent-color), 0.1);
+    background-color: rgba(var(--accent-color), 0.2);
 }
 
 .settings-items {
@@ -101,6 +106,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     margin: 10px;
+    height: 30px;
 }
 
 .settings-item-text {
