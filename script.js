@@ -16,10 +16,15 @@ function search() {
       '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
       '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
-    return !!urlPattern.test(urlString);
+      return !!urlPattern.test(urlString);
     }
-    if (isValidUrl(input_value)) {window.location.href = input_value}
-    else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
+    if (isValidUrl(input_value)) {
+        if (input_value.startsWith("https://") || input_value.startsWith("http://")) {
+            window.location.href = input_value
+        } else {
+            window.location.href = encodeURI("https://" + input_value)
+        }
+    } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
 }
 
 document.addEventListener("keypress", function(event) {
