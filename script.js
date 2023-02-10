@@ -20,7 +20,6 @@ function settingsToggle() {
         document.getElementById("settings-menu").classList.add("invisible")
         console.log("settings closed")
     }
-    console.log(document.getElementById("accent-color-input").value)
 }
 
 // Thx to Tim Down at on Stack Overflow for these functions
@@ -39,6 +38,7 @@ function rgbToHex(r, g, b) {
 // end of Stack Overflow functions
 
 function applyStyles() {
+    addStyleValuesToLocalStorage()
     var root = document.querySelector(":root")
     var storedAccentColor = localStorage.getItem("accentColor")
     var storedBackgroundColor = localStorage.getItem("backgroundColor")
@@ -64,9 +64,8 @@ function applyStyles() {
 }
 
 function addStyleValuesToLocalStorage() {
-    if (localStorage.getItem("wasUsedBefore") == null) {
-        localStorage.setItem("wasUsedBefore", true)
-        localStorage.setItem("accentColor", "0,0,0")
-        localStorage.setItem("backgroundColor", "255,255,255")
-    }
+    if (localStorage.getItem("wasUsedBefore") == "true") return
+    localStorage.setItem("wasUsedBefore", "true")
+    localStorage.setItem("accentColor", "0,0,0")
+    localStorage.setItem("backgroundColor", "255,255,255")
 }
