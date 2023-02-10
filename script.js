@@ -7,7 +7,7 @@ const searchEngines = {
 
 function search() {
     var input_value = document.getElementById("search-input").value
-    console.log(input_value)
+    var searchEngine = localStorage.getItem("searchEngine")
     if (/^\s*$/.test(input_value)) return
     const isValidUrl = urlString=> {
         var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
@@ -19,7 +19,7 @@ function search() {
     return !!urlPattern.test(urlString);
     }
     if (isValidUrl(input_value)) {window.location.href = input_value}
-    else {window.location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(input_value)}
+    else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
 }
 
 document.addEventListener("keypress", function(event) {
@@ -53,15 +53,19 @@ function rgbToHex(r, g, b) {
 }
 // end of Stack Overflow functions
 
-function applyStyles() {
+var accentInputEventListener
+var backgroundInputEventListener
+var searchEngineInputEventListener
+
+function applySettings() {
     addStyleValuesToLocalStorage()
     var root = document.querySelector(":root")
     var storedAccentColor = localStorage.getItem("accentColor")
     var storedBackgroundColor = localStorage.getItem("backgroundColor")
+    var storedSearchEngine = localStorage.getItem("searchEngine")
     const accentInput = document.getElementById("accent-color-input")
     const backgroundInput = document.getElementById("background-color-input")
-    var accentInputEventListener
-    var backgroundInputEventListener
+    const searchEngineSelect = document.getElementById("search-engines")
 
     // All the accent color shenanigans
     root.style.setProperty("--accent-color", storedAccentColor)
@@ -70,7 +74,7 @@ function applyStyles() {
         accentInput.addEventListener("change", () => {
             localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
             console.log("Accent Changed")
-            applyStyles()
+            applySettings()
         })
         accentInputEventListener = true
     }
@@ -82,9 +86,21 @@ function applyStyles() {
         backgroundInput.addEventListener("change", () => {
             localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
             console.log("Background Changed")
-            applyStyles()
+            applySettings()
         })
         backgroundInputEventListener = true
+    }
+
+    // All the Search Engine shenanigans
+    console.log(searchEngineSelect.value)
+    searchEngineSelect.value = storedSearchEngine
+    if(!searchEngineInputEventListener) {
+        searchEngineSelect.addEventListener("change", () => {
+            localStorage.setItem("searchEngine", `${searchEngineSelect.value}`)
+            console.log("Search Engine Changed")
+            applySettings()
+        })
+        searchEngineInputEventListener = true
     }
 }
 
@@ -93,4 +109,5 @@ function addStyleValuesToLocalStorage() {
     localStorage.setItem("wasUsedBefore", "true")
     localStorage.setItem("accentColor", "0,0,0")
     localStorage.setItem("backgroundColor", "255,255,255")
+    localStorage.setItem("searchEngine", "google")
 }
