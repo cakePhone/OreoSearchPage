@@ -25,13 +25,11 @@ function settingsToggle() {
 // thx to Tim Down at on Stack Overflow for these functions
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    result ? {
+    return result ? {
       r: parseInt(result[1], 16),
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
-    var rbgString = `${r},${g},${b}`
-    return rbgString
 }
   
 function rgbToHex(r, g, b) {
@@ -41,12 +39,16 @@ function rgbToHex(r, g, b) {
 
 function applyStyles() {
     var root = document.querySelector(":root")
-    var storedAccentColor = localStorage.getItem("backgroundColor")
+    var storedAccentColor = localStorage.getItem("accentColor")
     const accentInput = document.getElementById("accent-color-input")
     root.style.setProperty("--accent-color", localStorage.getItem("accentColor"))
     accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
-    //accentInput.addEventListener("change", (e) => {localStorage.setItem("accentColor", )})
-    console.log(hexToRgb(accentInput.value))
+    console.log(`RGB: ${hexToRgb(accentInput.value).r}, ${hexToRgb(accentInput.value).g}, ${hexToRgb(accentInput.value).b}`)
+    accentInput.addEventListener("change", (e) => {
+        localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
+        console.log("Accent Changed")
+        applyStyles()
+    })
 }
 
 function addStyleValuesToLocalStorage() {
