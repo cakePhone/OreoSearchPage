@@ -4,7 +4,7 @@ OreoSearch is a simple search page for your basic non-ugly browser needs. Need y
 ## Features
 OreoSearch has the following feautures:
 
-+ Custom Colors
++ Custom Colors:
   - Accent color for text and components
   - Background page color
 
