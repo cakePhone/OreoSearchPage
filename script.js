@@ -18,8 +18,8 @@ function search() {
       '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
     return !!urlPattern.test(urlString);
     }
-    if (isValidUrl(input_value)) {window.location.replace(input_value)}
-    else {window.location.replace("https://duckduckgo.com/?q=" + encodeURIComponent(input_value))}
+    if (isValidUrl(input_value)) {window.location.href = input_value}
+    else {window.location.href = "https://duckduckgo.com/?q=" + encodeURIComponent(input_value)}
 }
 
 document.addEventListener("keypress", function(event) {
