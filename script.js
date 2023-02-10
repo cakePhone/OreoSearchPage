@@ -1,3 +1,10 @@
+const searchEngines = {
+    google: "https://www.google.com/search?q=",
+    duckduckgo: "https://duckduckgo.com/?q=",
+    bing: "https://www.bing.com/search?q=",
+    brave: "https://search.brave.com/search?q="
+}
+
 function search() {
     var input_value = document.getElementById("search-input").value
     console.log(input_value)
@@ -44,6 +51,7 @@ function applyStyles() {
     var storedBackgroundColor = localStorage.getItem("backgroundColor")
     const accentInput = document.getElementById("accent-color-input")
     const backgroundInput = document.getElementById("background-color-input")
+
     // All the accent color shenanigans
     root.style.setProperty("--accent-color", storedAccentColor)
     accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
