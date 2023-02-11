@@ -134,6 +134,7 @@ function greetings() {
         usernameInput.addEventListener("change", () => {
             localStorage.setItem("username", usernameInput.value)
             greetingsText.innerText = chooseGreeting(new Date().getHours())
+            usernameInput.value = `${storedUsername}`
             console.log("Username changed")
         })
     }
