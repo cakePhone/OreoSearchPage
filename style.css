@@ -127,6 +127,19 @@ body {
     width: 2vw;
 }
 
+.settings-text-input {
+    background-color: rgba(var(--accent-color), 0.2);
+    border: none;
+    border-radius: 0.5rem;
+    height: 26px;
+    color:rgba(var(--accent-color));
+    text-indent: 7px;
+}
+
+.settings-text-input:focus {
+    outline: none;
+}
+
 .credits {
     position: absolute;
     bottom: 10px;

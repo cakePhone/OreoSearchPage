@@ -8,11 +8,14 @@ OreoSearch has the following feautures:
   - Accent color for text and components
   - Background page color
 
-+ 4 search engines and counting:
++ 5 search engines and counting:
   - Google
   - DuckDuckGo
   - Bing
   - Brave
+  - Ecosia
+
++ Greetings! The page will gladly greet you. Set your username in the settings!
 
 To request features, open an issue or contact me:
 + Telegram: https://t.me/OrioOreo

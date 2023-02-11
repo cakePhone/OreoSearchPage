@@ -71,6 +71,7 @@ var storedUsername = localStorage.getItem("username")
 const accentInput = document.getElementById("accent-color-input")
 const backgroundInput = document.getElementById("background-color-input")
 const searchEngineSelect = document.getElementById("search-engines")
+const usernameInput = document.getElementById("username-input")
 const greetingsText = document.getElementById("greeting")
 
 function onPageLoad() {
@@ -96,7 +97,7 @@ function accentColor() {
         accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
         accentInput.addEventListener("change", () => {
             localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
-            console.log("Accent Changed")
+            console.log("Accent changed")
         })
         accentInputEventListener = true
     }
@@ -108,7 +109,7 @@ function backgroundColor() {
         backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
         backgroundInput.addEventListener("change", () => {
             localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
-            console.log("Background Changed")
+            console.log("Background changed")
         })
         backgroundInputEventListener = true
     }
@@ -121,27 +122,39 @@ function searchEngine() {
         searchEngineSelect.addEventListener("change", () => {
             localStorage.setItem("searchEngine", `${searchEngineSelect.value}`)
             document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
-            console.log("Search Engine Changed")
+            console.log("Search Engine changed")
         })
         searchEngineInputEventListener = true
     }
 }
 
 function greetings() {
-    var hour = new Date().getHours()
+    greetingsText.innerText = chooseGreeting(new Date().getHours())
     if(!usernameEventListener) {
-        if ([6,7,8,9,10,11,12].includes(hour)) {
-            greetingsText.innerText = `Good morning ${storedUsername}!`
-        } else if ([13,14,15,16].includes(hour)) {
-            greetingsText.innerText = `Good afternoon ${storedUsername}!`
-        } else if ([17,18,19].includes(hour)) {
-            greetingsText.innerText = `Good evening ${storedUsername}!`
-        } else if ([20,21,22,23,0,1,2,3,4,5].includes(hour)) {
-            greetingsText.innerText = `Good night ${storedUsername}!`
-        } else {
-            greetingsText.innerText = `Hello ${storedUsername}!`
-        }
+        usernameInput.addEventListener("change", () => {
+            localStorage.setItem("username", usernameInput.value)
+            greetingsText.innerText = chooseGreeting(new Date().getHours())
+            console.log("Username changed")
+        })
     }
+}
+function chooseGreeting(hour) {
+    var greeting
+    var username
+    storedUsername = localStorage.getItem("username")
+    if (storedUsername != "") {username = ` ${storedUsername}`} else {username = storedUsername}
+    if ([6,7,8,9,10,11,12].includes(hour)) {
+        greeting = `Good morning${username}!`
+    } else if ([13,14,15,16].includes(hour)) {
+        greeting = `Good afternoon${username}!`
+    } else if ([17,18,19].includes(hour)) {
+        greeting = `Good evening${username}!`
+    } else if ([20,21,22,23,0,1,2,3,4,5].includes(hour)) {
+        greeting = `Good night${username}!`
+    } else {
+        greeting = `Hello${username}!`
+    }
+    return greeting
 }
 
 function setDefaultConfig() {
