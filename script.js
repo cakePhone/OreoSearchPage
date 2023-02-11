@@ -14,12 +14,12 @@ function search() {
     if (/^\s*$/.test(input_value)) return
     const isValidUrl = urlString=> {
         var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
-      '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
-      return !!urlPattern.test(urlString);
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+        '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+        return !!urlPattern.test(urlString);
     }
     if (isValidUrl(input_value)) {
         if (input_value.startsWith("https://") || input_value.startsWith("http://")) {
@@ -62,13 +62,16 @@ function rgbToHex(r, g, b) {
 var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
+var usernameEventListener
 var root = document.querySelector(":root")
 var storedAccentColor = localStorage.getItem("accentColor")
 var storedBackgroundColor = localStorage.getItem("backgroundColor")
 var storedSearchEngine = localStorage.getItem("searchEngine")
+var storedUsername = localStorage.getItem("username")
 const accentInput = document.getElementById("accent-color-input")
 const backgroundInput = document.getElementById("background-color-input")
 const searchEngineSelect = document.getElementById("search-engines")
+const greetingsText = document.getElementById("greeting")
 
 function onPageLoad() {
     // Version check
@@ -83,6 +86,7 @@ function onPageLoad() {
     accentColor()
     backgroundColor()
     searchEngine()
+    greetings()
 }
 
 // Takes care of changes in Accent Color
@@ -93,7 +97,6 @@ function accentColor() {
         accentInput.addEventListener("change", () => {
             localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
             console.log("Accent Changed")
-            accentColor()
         })
         accentInputEventListener = true
     }
@@ -106,7 +109,6 @@ function backgroundColor() {
         backgroundInput.addEventListener("change", () => {
             localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
             console.log("Background Changed")
-            backgroundColor()
         })
         backgroundInputEventListener = true
     }
@@ -120,9 +122,25 @@ function searchEngine() {
             localStorage.setItem("searchEngine", `${searchEngineSelect.value}`)
             document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
             console.log("Search Engine Changed")
-            searchEngine()
         })
         searchEngineInputEventListener = true
+    }
+}
+
+function greetings() {
+    var hour = new Date().getHours()
+    if(!usernameEventListener) {
+        if ([6,7,8,9,10,11,12].includes(hour)) {
+            greetingsText.innerText = `Good morning ${storedUsername}!`
+        } else if ([13,14,15,16].includes(hour)) {
+            greetingsText.innerText = `Good afternoon ${storedUsername}!`
+        } else if ([17,18,19].includes(hour)) {
+            greetingsText.innerText = `Good evening ${storedUsername}!`
+        } else if ([20,21,22,23,0,1,2,3,4,5].includes(hour)) {
+            greetingsText.innerText = `Good night ${storedUsername}!`
+        } else {
+            greetingsText.innerText = `Hello ${storedUsername}!`
+        }
     }
 }
 

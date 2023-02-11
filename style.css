@@ -32,13 +32,10 @@ body {
     margin-top: 30vh;
 }
 
-.logo-text {
-    margin-bottom: 5vh;
-    font-size: 3vw;
-}
-
-.greeting {
-    color: rgba(var(--accent-color), 0.2);
+#greeting {
+    color: rgba(var(--accent-color));
+    text-align: center;
+    margin: 15px;
 }
 
 .search {
