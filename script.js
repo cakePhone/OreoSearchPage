@@ -4,7 +4,8 @@ const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
     bing: "https://www.bing.com/search?q=",
-    brave: "https://search.brave.com/search?q="
+    brave: "https://search.brave.com/search?q=",
+    ecosia: "https://www.ecosia.org/search?method=index&q="
 }
 
 function search() {
