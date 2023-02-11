@@ -1,3 +1,5 @@
+const currentVersion = 20230211.02
+
 const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
@@ -27,9 +29,6 @@ function search() {
     } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
 }
 
-document.addEventListener("keypress", function(event) {
-    if (event.keyCode == 13) {search()}});
-
 // Basically takes care of the stuffs when you click the settings button
 function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
@@ -58,61 +57,82 @@ function rgbToHex(r, g, b) {
 }
 // end of Stack Overflow functions
 
+// Main code
 var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
+var root = document.querySelector(":root")
+var storedAccentColor = localStorage.getItem("accentColor")
+var storedBackgroundColor = localStorage.getItem("backgroundColor")
+var storedSearchEngine = localStorage.getItem("searchEngine")
+const accentInput = document.getElementById("accent-color-input")
+const backgroundInput = document.getElementById("background-color-input")
+const searchEngineSelect = document.getElementById("search-engines")
 
-function applySettings() {
-    addStyleValuesToLocalStorage()
-    var root = document.querySelector(":root")
-    var storedAccentColor = localStorage.getItem("accentColor")
-    var storedBackgroundColor = localStorage.getItem("backgroundColor")
-    var storedSearchEngine = localStorage.getItem("searchEngine")
-    const accentInput = document.getElementById("accent-color-input")
-    const backgroundInput = document.getElementById("background-color-input")
-    const searchEngineSelect = document.getElementById("search-engines")
+function onPageLoad() {
+    // Version check
+    if (localStorage.getItem("version") < currentVersion ) {
+        localStorage.setItem("version", currentVersion)
+        updateLocalStorageValues()
+    }
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode == 13) {search()}
+    });
 
-    // All the accent color shenanigans
-    root.style.setProperty("--accent-color", storedAccentColor)
-    accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
+    // Call all settings related functions
+    accentColor()
+    backgroundColor()
+    searchEngine()
+}
+
+// Takes care of changes in Accent Color
+function accentColor() {
     if (!accentInputEventListener) {
+        root.style.setProperty("--accent-color", storedAccentColor)
+        accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
         accentInput.addEventListener("change", () => {
             localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
             console.log("Accent Changed")
-            applySettings()
+            accentColor()
         })
         accentInputEventListener = true
     }
+}
 
-    // All the background color shenanigans
-    root.style.setProperty("--background-color", storedBackgroundColor)
-    backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
+function backgroundColor() {
     if (!backgroundInputEventListener) {
+        root.style.setProperty("--background-color", storedBackgroundColor)
+        backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
         backgroundInput.addEventListener("change", () => {
             localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
             console.log("Background Changed")
-            applySettings()
+            backgroundColor()
         })
         backgroundInputEventListener = true
     }
+}
 
-    // All the Search Engine shenanigans
-    searchEngineSelect.value = storedSearchEngine
-    document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
+function searchEngine() {
     if(!searchEngineInputEventListener) {
+        searchEngineSelect.value = storedSearchEngine
+        document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
         searchEngineSelect.addEventListener("change", () => {
             localStorage.setItem("searchEngine", `${searchEngineSelect.value}`)
+            document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
             console.log("Search Engine Changed")
-            applySettings()
+            searchEngine()
         })
         searchEngineInputEventListener = true
     }
 }
 
-function addStyleValuesToLocalStorage() {
-    if (localStorage.getItem("wasUsedBefore") == "true") return
-    localStorage.setItem("wasUsedBefore", "true")
+function setDefaultConfig() {
     localStorage.setItem("accentColor", "0,0,0")
     localStorage.setItem("backgroundColor", "255,255,255")
     localStorage.setItem("searchEngine", "google")
+}
+
+// This function is pretty much useless and is only called once every update
+function updateLocalStorageValues() {
+
 }
