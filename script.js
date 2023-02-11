@@ -1,4 +1,4 @@
-const currentVersion = 20230211.02
+const currentVersion = 20230211.01
 
 const searchEngines = {
     google: "https://www.google.com/search?q=",
@@ -72,8 +72,7 @@ const searchEngineSelect = document.getElementById("search-engines")
 
 function onPageLoad() {
     // Version check
-    if (localStorage.getItem("version") < currentVersion ) {
-        localStorage.setItem("version", currentVersion)
+    if (localStorage.getItem("version") < currentVersion || localStorage.getItem("version" == null)) {
         updateLocalStorageValues()
     }
     document.addEventListener("keypress", function(event) {
@@ -135,5 +134,6 @@ function setDefaultConfig() {
 
 // This function is pretty much useless and is only called once every update
 function updateLocalStorageValues() {
-
+    localStorage.setItem("version", currentVersion)
+    localStorage.setItem("username", "User")
 }
