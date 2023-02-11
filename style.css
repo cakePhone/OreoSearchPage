@@ -30,11 +30,13 @@ body {
 
 .greetings {
     margin-top: 30vh;
+    margin-bottom: 5vh;
 }
 
 #greeting {
     color: rgba(var(--accent-color));
     text-align: center;
+    font-size: 3rem;
     margin: 15px;
 }
 
