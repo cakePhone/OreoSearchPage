@@ -61,7 +61,7 @@ var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
 var usernameEventListener
-var firstRun = localStorage.getItem("firstrun")
+var firstRun = localStorage.getItem("firstRun")
 var root = document.querySelector(":root")
 var storedAccentColor = localStorage.getItem("accentColor")
 var storedBackgroundColor = localStorage.getItem("backgroundColor")
