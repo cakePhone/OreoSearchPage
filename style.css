@@ -68,6 +68,10 @@ body {
     margin-right: 15px;
 }
 
+#search-input::-webkit-input-placeholder {
+    color:rgba(var(--accent-color), 0.5)
+}
+
 #search-input:focus {
     outline: none;
 }
@@ -124,9 +128,15 @@ body {
 }
 
 .color-input {
-    border: 0;
+    border: none !important;
     padding: 0px;
-    width: 2vw;
+    width: 40px;
+}
+
+.color-input::-webkit-color-swatch-wrapper, .color-input::-webkit-color-swatch {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
 }
 
 .settings-text-input {
