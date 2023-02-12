@@ -1,5 +1,3 @@
-const currentVersion = 20230211.01
-
 const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
@@ -63,6 +61,7 @@ var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
 var usernameEventListener
+var firstRun = localStorage.getItem("firstrun")
 var root = document.querySelector(":root")
 var storedAccentColor = localStorage.getItem("accentColor")
 var storedBackgroundColor = localStorage.getItem("backgroundColor")
@@ -75,10 +74,8 @@ const usernameInput = document.getElementById("username-input")
 const greetingsText = document.getElementById("greeting")
 
 function onPageLoad() {
-    // Version check
-    if (localStorage.getItem("version") < currentVersion || localStorage.getItem("version" == null)) {
-        updateLocalStorageValues()
-    }
+    if (firstRun == null) {setup()}
+
     document.addEventListener("keypress", function(event) {
         if (event.keyCode == 13) {search()}
     });
@@ -172,4 +169,12 @@ function setDefaultConfig() {
     backgroundInput.dispatchEvent(new Event("change"))
     searchEngineSelect.dispatchEvent(new Event("change"))
     usernameInput.dispatchEvent(new Event("change"))
+}
+
+function setup() {
+    localStorage.setItem("firstRun", "false")
+    localStorage.setItem("accentColor", "0,0,0")
+    localStorage.setItem("backgroundColor", "255,255,255")
+    localStorage.setItem("searchEngine", "google")
+    localStorage.setItem("username", "")
 }
