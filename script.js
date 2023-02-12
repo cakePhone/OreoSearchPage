@@ -35,11 +35,11 @@ function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
         document.getElementById("settings-menu").classList.remove("invisible")
         document.getElementById("settings-menu").classList.add("visible")
-        console.log("settings opened")
+        console.log("Settings opened")
     } else {
         document.getElementById("settings-menu").classList.remove("visible")
         document.getElementById("settings-menu").classList.add("invisible")
-        console.log("settings closed")
+        console.log("Settings closed")
     }
 }
 
@@ -134,11 +134,11 @@ function searchEngine() {
 
 function greetings() {
     greetingsText.innerText = chooseGreeting(new Date().getHours())
+    usernameInput.value = `${storedUsername}`
     if(!usernameEventListener) {
         usernameInput.addEventListener("change", () => {
             localStorage.setItem("username", usernameInput.value)
             greetingsText.innerText = chooseGreeting(new Date().getHours())
-            usernameInput.value = `${storedUsername}`
             console.log("Username changed")
         })
     }
