@@ -36,7 +36,7 @@ All done! Enjoy the search page!
 ### Chrome and Chromium based browsers
 Click the three dots icon on the top right corner of the screen and click settings. Then go to the "On start-up" tab on the left menu and select "Open a specific page or set of pages". Click "Add new page" and paste https://cakephone.github.io/OreoSearchPage/ in the url box.
 
-Then install [New Tab Override](https://chrome.google.com/webstore/detail/new-tab-override/fjcmlondipcnnpmbcollgifldmajfonf/related) and go to the extension options, there will be a simple URL box on the top left, paste https://cakephone.github.io/OreoSearchPage/ in there and click save. Enjoy Oreo home page!
+Then install [Custom New Tab URL](https://chrome.google.com/webstore/detail/custom-new-tab-url/mmjbdbjnoablegbkcklggeknkfcjkjia/related?hl=en) and go to the extension options, click the checkbox to enable it and past this URL https://cakephone.github.io/OreoSearchPage/ in the box. Enjoy Oreo home page!
 
 ### About Updates!
-Since this search page is hosted on Github Pages, it's updated automagically with every push. Enjoy the hassle free updates!
+Since this home page is hosted on Github Pages, it's updated automagically with every push. Enjoy the hassle free updates!
