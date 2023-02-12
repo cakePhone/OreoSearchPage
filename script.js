@@ -97,6 +97,8 @@ function accentColor() {
         accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
         accentInput.addEventListener("change", () => {
             localStorage.setItem("accentColor", `${hexToRgb(accentInput.value).r},${hexToRgb(accentInput.value).g},${hexToRgb(accentInput.value).b}`)
+            storedAccentColor = localStorage.getItem("accentColor")
+            root.style.setProperty("--accent-color", storedAccentColor)
             console.log("Accent changed")
         })
         accentInputEventListener = true
@@ -109,6 +111,8 @@ function backgroundColor() {
         backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
         backgroundInput.addEventListener("change", () => {
             localStorage.setItem("backgroundColor", `${hexToRgb(backgroundInput.value).r},${hexToRgb(backgroundInput.value).g},${hexToRgb(backgroundInput.value).b}`)
+            storedBackgroundColor = localStorage.getItem("backgroundColor")
+            root.style.setProperty("--background-color", storedBackgroundColor)
             console.log("Background changed")
         })
         backgroundInputEventListener = true
@@ -159,13 +163,13 @@ function chooseGreeting(hour) {
 }
 
 function setDefaultConfig() {
-    localStorage.setItem("accentColor", "0,0,0")
-    localStorage.setItem("backgroundColor", "255,255,255")
-    localStorage.setItem("searchEngine", "google")
-}
-
-// This function is pretty much useless and is only called once every update
-function updateLocalStorageValues() {
-    localStorage.setItem("version", currentVersion)
-    localStorage.setItem("username", "User")
+    if(!confirm("Are you sure?")) return
+    accentInput.value = "#000000"
+    backgroundInput.value = "#ffffff"
+    searchEngineSelect.value = "google"
+    usernameInput.value = ""
+    accentInput.dispatchEvent(new Event("change"))
+    backgroundInput.dispatchEvent(new Event("change"))
+    searchEngineSelect.dispatchEvent(new Event("change"))
+    usernameInput.dispatchEvent(new Event("change"))
 }

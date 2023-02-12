@@ -142,6 +142,28 @@ body {
     outline: none;
 }
 
+.button {
+    background-color: rgba(var(--accent-color), 0.2);
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.button:active {
+    background-color: rgba(var(--accent-color), 0.1);
+}
+
+#set-to-default {
+    height: 26px;
+    width: 100%;
+    color: rgba(var(--accent-color));
+    text-align: center;
+}
+
+#set-to-default:hover {
+    background-color: rgba(255,0,0,0.2);
+    color: rgb(255,0,0)
+}
+
 .credits {
     position: absolute;
     bottom: 10px;
