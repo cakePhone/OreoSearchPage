@@ -1,3 +1,18 @@
+var accentInputEventListener
+var backgroundInputEventListener
+var searchEngineInputEventListener
+var usernameEventListener
+var firstRun = localStorage.getItem("firstRun")
+var root = document.querySelector(":root")
+var storedAccentColor = localStorage.getItem("accentColor")
+var storedBackgroundColor = localStorage.getItem("backgroundColor")
+var storedSearchEngine = localStorage.getItem("searchEngine")
+var storedUsername = localStorage.getItem("username")
+const accentInput = document.getElementById("accent-color-input")
+const backgroundInput = document.getElementById("background-color-input")
+const searchEngineSelect = document.getElementById("search-engines")
+const usernameInput = document.getElementById("username-input")
+const greetingsText = document.getElementById("greeting")
 const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
@@ -5,11 +20,13 @@ const searchEngines = {
     brave: "https://search.brave.com/search?q=",
     ecosia: "https://www.ecosia.org/search?method=index&q="
 }
+// ^^^ Declare global variables ^^^
 
+// Takes care of searches
 function search() {
-    var input_value = document.getElementById("search-input").value
+    var inputValue = document.getElementById("search-input").value
     var searchEngine = localStorage.getItem("searchEngine")
-    if (/^\s*$/.test(input_value)) return
+    if (/^\s*$/.test(inputValue)) return
     const isValidUrl = urlString=> {
         var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
@@ -19,8 +36,8 @@ function search() {
         '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
         return !!urlPattern.test(urlString);
     }
-    if (isValidUrl(input_value)) {
-        if (input_value.startsWith("https://") || input_value.startsWith("http://")) {
+    if (isValidUrl(inputValue)) {
+        if (inputValue.startsWith("https://") || inputValue.startsWith("http://")) {
             window.location.href = input_value
         } else {
             window.location.href = encodeURI("https://" + input_value)
@@ -28,7 +45,7 @@ function search() {
     } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
 }
 
-// Basically takes care of the stuffs when you click the settings button
+// Handles settings visibility
 function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
         document.getElementById("settings-menu").classList.remove("invisible")
@@ -56,37 +73,6 @@ function rgbToHex(r, g, b) {
 }
 // end of Stack Overflow functions
 
-// Main code
-var accentInputEventListener
-var backgroundInputEventListener
-var searchEngineInputEventListener
-var usernameEventListener
-var firstRun = localStorage.getItem("firstRun")
-var root = document.querySelector(":root")
-var storedAccentColor = localStorage.getItem("accentColor")
-var storedBackgroundColor = localStorage.getItem("backgroundColor")
-var storedSearchEngine = localStorage.getItem("searchEngine")
-var storedUsername = localStorage.getItem("username")
-const accentInput = document.getElementById("accent-color-input")
-const backgroundInput = document.getElementById("background-color-input")
-const searchEngineSelect = document.getElementById("search-engines")
-const usernameInput = document.getElementById("username-input")
-const greetingsText = document.getElementById("greeting")
-
-function onPageLoad() {
-    if (firstRun == null) {setup()}
-
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode == 13) {search()}
-    });
-
-    // Call all settings related functions
-    accentColor()
-    backgroundColor()
-    searchEngine()
-    greetings()
-}
-
 // Takes care of changes in Accent Color
 function accentColor() {
     if (!accentInputEventListener) {
@@ -102,6 +88,7 @@ function accentColor() {
     }
 }
 
+// Takes care of changes in Background Color
 function backgroundColor() {
     if (!backgroundInputEventListener) {
         root.style.setProperty("--background-color", storedBackgroundColor)
@@ -116,6 +103,7 @@ function backgroundColor() {
     }
 }
 
+// Takes care of Search Engine changes
 function searchEngine() {
     if(!searchEngineInputEventListener) {
         searchEngineSelect.value = storedSearchEngine
@@ -129,6 +117,7 @@ function searchEngine() {
     }
 }
 
+// Handles the greetings text
 function greetings() {
     greetingsText.innerText = chooseGreeting(new Date().getHours())
     usernameInput.value = `${storedUsername}`
@@ -140,6 +129,8 @@ function greetings() {
         })
     }
 }
+
+// Helper function to determine the greeting to use
 function chooseGreeting(hour) {
     var greeting
     var username
@@ -159,6 +150,7 @@ function chooseGreeting(hour) {
     return greeting
 }
 
+// !!! DANGER !!! Sets ALL values to default config
 function setDefaultConfig() {
     if(!confirm("Are you sure?")) return
     accentInput.value = "#000000"
@@ -171,10 +163,28 @@ function setDefaultConfig() {
     usernameInput.dispatchEvent(new Event("change"))
 }
 
+// First time setup function
 function setup() {
     localStorage.setItem("firstRun", "false")
     localStorage.setItem("accentColor", "0,0,0")
     localStorage.setItem("backgroundColor", "255,255,255")
     localStorage.setItem("searchEngine", "google")
     localStorage.setItem("username", "")
+}
+
+// Main functions. Gets called on page load.
+function onPageLoad() {
+    // Check if it's first time running website
+    if (firstRun == null) {setup()}
+
+    // Add event listener for "Enter" key presses
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode == 13) {search()}
+    });
+
+    // Call all settings related functions
+    accentColor()
+    backgroundColor()
+    searchEngine()
+    greetings()
 }
