@@ -38,11 +38,11 @@ function search() {
     }
     if (isValidUrl(inputValue)) {
         if (inputValue.startsWith("https://") || inputValue.startsWith("http://")) {
-            window.location.href = input_value
+            window.location.href = inputValue
         } else {
-            window.location.href = encodeURI("https://" + input_value)
+            window.location.href = encodeURI("https://" + inputValue)
         }
-    } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(input_value)}
+    } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(inputValue)}
 }
 
 // Handles settings visibility
@@ -135,17 +135,17 @@ function chooseGreeting(hour) {
     var greeting
     var username
     storedUsername = localStorage.getItem("username")
-    if (storedUsername != "") {username = ` ${storedUsername}`} else {username = storedUsername}
+    if (storedUsername != "") {username = `, ${storedUsername}`} else {username = storedUsername}
     if ([6,7,8,9,10,11,12].includes(hour)) {
-        greeting = `Good morning,${username}!`
+        greeting = `Good morning${username}!`
     } else if ([13,14,15,16].includes(hour)) {
-        greeting = `Good afternoon,${username}!`
+        greeting = `Good afternoon${username}!`
     } else if ([17,18,19].includes(hour)) {
-        greeting = `Good evening,${username}!`
+        greeting = `Good evening${username}!`
     } else if ([20,21,22,23,0,1,2,3,4,5].includes(hour)) {
-        greeting = `Good night,${username}!`
+        greeting = `Good night${username}!`
     } else {
-        greeting = `Hello,${username}!`
+        greeting = `Hello${username}!`
     }
     return greeting
 }
