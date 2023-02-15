@@ -85,7 +85,7 @@ body {
     align-items: flex-end;
 }
 
-.settings-button {
+#settings-button {
     height: 24px;
     width: 24px;
 }
@@ -96,7 +96,7 @@ body {
 
 #settings-menu {
     height: fit-content;
-    max-height: 50vh;
+    max-height: 60vh;
     margin-top: 10px;
     padding: 10px 10px;
     width: fit-content;
@@ -158,11 +158,11 @@ body {
     border-radius: 0.5rem;
 }
 
-.button:active {
-    background-color: rgba(var(--accent-color), 0.1);
+.button:active, .button:hover {
+    background-color: rgba(var(--accent-color), 0.3);
 }
 
-#set-to-default {
+.settings-button {
     height: 26px;
     width: 100%;
     color: rgba(var(--accent-color));
@@ -172,6 +172,15 @@ body {
 #set-to-default:hover {
     background-color: rgba(255,0,0,0.2);
     color: rgb(255,0,0)
+}
+
+#background-image-file, #background-image-file::-webkit-file-upload-button, #background-image-file::file-selector-button {
+    color: rgba(var(--accent-color));
+    background-color: rgba(var(--accent-color), 0.2);
+    border-radius: 0.5rem;
+    border-color: rgba(var(--accent-color));
+    height: 26px;
+    max-width: 150px;
 }
 
 .credits {
@@ -185,4 +194,16 @@ body {
     opacity: 50%;
     margin-top: 0%;
     margin-bottom: 0%;
+}
+
+#background-image {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    object-fit: cover;
+    border: none !important;
+    outline: none !important;
 }

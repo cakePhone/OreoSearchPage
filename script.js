@@ -1,18 +1,20 @@
 var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
-var usernameEventListener
+var nicknameEventListener
 var firstRun = localStorage.getItem("firstRun")
 var root = document.querySelector(":root")
 var storedAccentColor = localStorage.getItem("accentColor")
 var storedBackgroundColor = localStorage.getItem("backgroundColor")
 var storedSearchEngine = localStorage.getItem("searchEngine")
-var storedUsername = localStorage.getItem("username")
+var storednickname = localStorage.getItem("nickname")
 const accentInput = document.getElementById("accent-color-input")
 const backgroundInput = document.getElementById("background-color-input")
 const searchEngineSelect = document.getElementById("search-engines")
-const usernameInput = document.getElementById("username-input")
+const nicknameInput = document.getElementById("nickname-input")
 const greetingsText = document.getElementById("greeting")
+const fileInput = document.getElementById('background-image-file')
+const backgroundImage = document.getElementById('background-image')
 const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
@@ -120,12 +122,12 @@ function searchEngine() {
 // Handles the greetings text
 function greetings() {
     greetingsText.innerText = chooseGreeting(new Date().getHours())
-    usernameInput.value = `${storedUsername}`
-    if(!usernameEventListener) {
-        usernameInput.addEventListener("change", () => {
-            localStorage.setItem("username", usernameInput.value)
+    nicknameInput.value = `${storednickname}`
+    if(!nicknameEventListener) {
+        nicknameInput.addEventListener("change", () => {
+            localStorage.setItem("username", nicknameInput.value)
             greetingsText.innerText = chooseGreeting(new Date().getHours())
-            console.log("Username changed")
+            console.log("Nickname changed")
         })
     }
 }
@@ -133,21 +135,44 @@ function greetings() {
 // Helper function to determine the greeting to use
 function chooseGreeting(hour) {
     var greeting
-    var username
-    storedUsername = localStorage.getItem("username")
-    if (storedUsername != "") {username = `, ${storedUsername}`} else {username = storedUsername}
+    var nickname
+    storednickname = localStorage.getItem("username")
+    if (storednickname != "") {nickname = `, ${storednickname}`} else {nickname = storednickname}
     if ([6,7,8,9,10,11,12].includes(hour)) {
-        greeting = `Good morning${username}!`
+        greeting = `Good morning${nickname}!`
     } else if ([13,14,15,16].includes(hour)) {
-        greeting = `Good afternoon${username}!`
+        greeting = `Good afternoon${nickname}!`
     } else if ([17,18,19].includes(hour)) {
-        greeting = `Good evening${username}!`
+        greeting = `Good evening${nickname}!`
     } else if ([20,21,22,23,0,1,2,3,4,5].includes(hour)) {
-        greeting = `Good night${username}!`
+        greeting = `Good night${nickname}!`
     } else {
-        greeting = `Hello${username}!`
+        greeting = `Hello${nickname}!`
     }
     return greeting
+}
+
+// Helper function for handling images
+function imageToBase64() {
+    backgroundImage.src = `data:image/png;base64, ${localStorage.getItem("backgroundImage")}`
+
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0]
+        const reader = new FileReader()
+        reader.onload = () => {
+            backgroundImage.src = reader.result
+            const base64Image = backgroundImage.src.split(',')[1]
+            localStorage.setItem('backgroundImage', base64Image)
+        }
+        reader.readAsDataURL(file)
+    })
+}
+
+function removeBackground() {
+    backgroundImage.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
+    fileInput.value = ""
+    localStorage.setItem("backgroundImage", "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA")
+    fileInput.dispatchEvent(new Event("change"))
 }
 
 // !!! DANGER !!! Sets ALL values to default config
@@ -156,11 +181,11 @@ function setDefaultConfig() {
     accentInput.value = "#000000"
     backgroundInput.value = "#ffffff"
     searchEngineSelect.value = "google"
-    usernameInput.value = ""
+    nicknameInput.value = ""
     accentInput.dispatchEvent(new Event("change"))
     backgroundInput.dispatchEvent(new Event("change"))
     searchEngineSelect.dispatchEvent(new Event("change"))
-    usernameInput.dispatchEvent(new Event("change"))
+    nicknameInput.dispatchEvent(new Event("change"))
 }
 
 // First time setup function
@@ -187,4 +212,5 @@ function onPageLoad() {
     backgroundColor()
     searchEngine()
     greetings()
+    imageToBase64()
 }
