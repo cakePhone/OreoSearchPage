@@ -192,24 +192,33 @@ function removeBackground() {
 }
 
 function specialEffects() {
-    if(storedSpecialEffects == null) {localStorage.setItem("useSpecialEffects", "true"); storedSpecialEffects = localStorage.getItem("useSpecialEffects")}
-    specialEffectsCheck.checked = true
+    if(storedSpecialEffects == null) {localStorage.setItem("useSpecialEffects", true); storedSpecialEffects = localStorage.getItem("useSpecialEffects")}
     if(!specialEffectsListener) {
         specialEffectsCheck.addEventListener("change", () => {
-            if(storedSpecialEffects === "true") {
-                localStorage.setItem("useSpecialEffects", "false")
-                root.style.setProperty("--box-shadows", "none")
-                root.style.setProperty("--blur-filter", "none")
-                root.style.setProperty("--text-shadows", "none")
-                specialEffectsCheck.checked = false
-            } else {
-                localStorage.setItem("useSpecialEffects", "true")
-                root.style.setProperty("--box-shadows", "0px 5px 5px rgba(0,0,0,0.2)")
-                root.style.setProperty("--blur-filter", "blur(20px) brightness(80%)")
-                root.style.setProperty("--text-shadows", "0px 2px 5px rgba(0,0,0,0.5)")
-                specialEffectsCheck.checked = true
+            switch(specialEffectsCheck.checked) {
+                case false:
+                    localStorage.setItem("useSpecialEffects", false)
+                    root.style.setProperty("--box-shadows", "none")
+                    root.style.setProperty("--blur-filter", "none")
+                    root.style.setProperty("--text-shadows", "none")
+                    console.log("Special Effects: off")
+                    break
+                case true:
+                    localStorage.setItem("useSpecialEffects", true)
+                    root.style.setProperty("--box-shadows", "0px 5px 5px rgba(0,0,0,0.2)")
+                    root.style.setProperty("--blur-filter", "blur(20px) brightness(80%)")
+                    root.style.setProperty("--text-shadows", "0px 2px 5px rgba(0,0,0,0.5)")
+                    console.log("Special Effects: on")
+                    break
+                default:
+                    localStorage.setItem("useSpecialEffects", true)
+                    root.style.setProperty("--box-shadows", "0px 5px 5px rgba(0,0,0,0.2)")
+                    root.style.setProperty("--blur-filter", "blur(20px) brightness(80%)")
+                    root.style.setProperty("--text-shadows", "0px 2px 5px rgba(0,0,0,0.5)")
+                    console.log("Special Effects: default")
             }
         })
+        specialEffectsCheck.dispatchEvent(new Event("change"))
     }
 }
 
