@@ -1,13 +1,20 @@
+// Event Listener variables
 var accentInputEventListener
 var backgroundInputEventListener
 var searchEngineInputEventListener
 var nicknameEventListener
-var firstRun = localStorage.getItem("firstRun")
-var root = document.querySelector(":root")
+var specialEffectsListener
+
+// Local Storage variables
 var storedAccentColor = localStorage.getItem("accentColor")
 var storedBackgroundColor = localStorage.getItem("backgroundColor")
 var storedSearchEngine = localStorage.getItem("searchEngine")
 var storednickname = localStorage.getItem("username")
+var storedImage = localStorage.getItem("backgroundImage")
+var storedSpecialEffects = localStorage.getItem("useSpecialEffects")
+
+// Element variables
+var root = document.querySelector(":root")
 const accentInput = document.getElementById("accent-color-input")
 const backgroundInput = document.getElementById("background-color-input")
 const searchEngineSelect = document.getElementById("search-engines")
@@ -15,6 +22,9 @@ const nicknameInput = document.getElementById("nickname-input")
 const greetingsText = document.getElementById("greeting")
 const fileInput = document.getElementById('background-image-file')
 const backgroundImage = document.getElementById('background-image')
+const specialEffectsCheck = document.getElementById("special-effects-checkbox-value")
+
+// Search Engines
 const searchEngines = {
     google: "https://www.google.com/search?q=",
     duckduckgo: "https://duckduckgo.com/?q=",
@@ -60,7 +70,7 @@ function settingsToggle() {
     }
 }
 
-// Thx to Tim Down at on Stack Overflow for these functions
+// Thx to Tim Down on Stack Overflow for these functions
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -77,6 +87,7 @@ function rgbToHex(r, g, b) {
 
 // Takes care of changes in Accent Color
 function accentColor() {
+    if(storedAccentColor == null) {localStorage.setItem("accentColor", "255,255,255"); storedAccentColor = localStorage.getItem("accentColor")}
     if (!accentInputEventListener) {
         root.style.setProperty("--accent-color", storedAccentColor)
         accentInput.value = rgbToHex(storedAccentColor.slice(0, storedAccentColor.indexOf(",")), storedAccentColor.slice(storedAccentColor.indexOf(",")+1, storedAccentColor.lastIndexOf(",")), storedAccentColor.slice(storedAccentColor.lastIndexOf(",")+1))
@@ -92,6 +103,7 @@ function accentColor() {
 
 // Takes care of changes in Background Color
 function backgroundColor() {
+    if(storedBackgroundColor == null) {localStorage.setItem("backgroundColor", "0,0,0"); storedBackgroundColor = localStorage.getItem("backgroundColor")}
     if (!backgroundInputEventListener) {
         root.style.setProperty("--background-color", storedBackgroundColor)
         backgroundInput.value = rgbToHex(storedBackgroundColor.slice(0, storedBackgroundColor.indexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.indexOf(",")+1, storedBackgroundColor.lastIndexOf(",")), storedBackgroundColor.slice(storedBackgroundColor.lastIndexOf(",")+1))
@@ -107,6 +119,7 @@ function backgroundColor() {
 
 // Takes care of Search Engine changes
 function searchEngine() {
+    if(storedSearchEngine == null) {localStorage.setItem("searchEngine", "google"); storedSearchEngine = localStorage.getItem("searchEngine")}
     if(!searchEngineInputEventListener) {
         searchEngineSelect.value = storedSearchEngine
         document.getElementById("search-input").placeholder = `Search with ${searchEngineSelect.options[searchEngineSelect.selectedIndex].text}`
@@ -121,6 +134,7 @@ function searchEngine() {
 
 // Handles the greetings text
 function greetings() {
+    if(storednickname == null) {localStorage.setItem("username", ""); storednickname = localStorage.getItem("username")}
     greetingsText.innerText = chooseGreeting(new Date().getHours())
     nicknameInput.value = `${storednickname}`
     if(!nicknameEventListener) {
@@ -154,7 +168,8 @@ function chooseGreeting(hour) {
 
 // Helper function for handling images
 function imageToBase64() {
-    backgroundImage.src = `data:image/png;base64, ${localStorage.getItem("backgroundImage")}`
+    if(storedImage == null) {localStorage.setItem("backgroundImage", "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA")}
+    backgroundImage.src = `data:image/png;base64,${localStorage.getItem("backgroundImage")}`
 
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0]
@@ -168,11 +183,34 @@ function imageToBase64() {
     })
 }
 
+// Removes set background image
 function removeBackground() {
     backgroundImage.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
     fileInput.value = ""
     localStorage.setItem("backgroundImage", "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA")
     fileInput.dispatchEvent(new Event("change"))
+}
+
+function specialEffects() {
+    if(storedSpecialEffects == null) {localStorage.setItem("useSpecialEffects", "true"); storedSpecialEffects = localStorage.getItem("useSpecialEffects")}
+    specialEffectsCheck.checked = true
+    if(!specialEffectsListener) {
+        specialEffectsCheck.addEventListener("change", () => {
+            if(storedSpecialEffects === "true") {
+                localStorage.setItem("useSpecialEffects", "false")
+                root.style.setProperty("--box-shadows", "none")
+                root.style.setProperty("--blur-filter", "none")
+                root.style.setProperty("--text-shadows", "none")
+                specialEffectsCheck.checked = false
+            } else {
+                localStorage.setItem("useSpecialEffects", "true")
+                root.style.setProperty("--box-shadows", "0px 5px 5px rgba(0,0,0,0.2)")
+                root.style.setProperty("--blur-filter", "blur(20px) brightness(80%)")
+                root.style.setProperty("--text-shadows", "0px 2px 5px rgba(0,0,0,0.5)")
+                specialEffectsCheck.checked = true
+            }
+        })
+    }
 }
 
 // !!! DANGER !!! Sets ALL values to default config
@@ -182,26 +220,16 @@ function setDefaultConfig() {
     backgroundInput.value = "#ffffff"
     searchEngineSelect.value = "google"
     nicknameInput.value = ""
+    removeBackground()
     accentInput.dispatchEvent(new Event("change"))
     backgroundInput.dispatchEvent(new Event("change"))
     searchEngineSelect.dispatchEvent(new Event("change"))
     nicknameInput.dispatchEvent(new Event("change"))
-}
-
-// First time setup function
-function setup() {
-    localStorage.setItem("firstRun", "false")
-    localStorage.setItem("accentColor", "0,0,0")
-    localStorage.setItem("backgroundColor", "255,255,255")
-    localStorage.setItem("searchEngine", "google")
-    localStorage.setItem("username", "")
+    specialEffectsCheck.dispatchEvent(new Event("change"))
 }
 
 // Main functions. Gets called on page load.
 function onPageLoad() {
-    // Check if it's first time running website
-    if (firstRun == null) {setup()}
-
     // Add event listener for "Enter" key presses
     document.addEventListener("keypress", function(event) {
         if (event.keyCode == 13) {search()}
@@ -213,4 +241,5 @@ function onPageLoad() {
     searchEngine()
     greetings()
     imageToBase64()
+    specialEffects()
 }

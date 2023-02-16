@@ -1,6 +1,9 @@
 :root {
     --background-color: 255,255,255;
     --accent-color: 0,0,0;
+    --blur-filter: blur(20px) brightness(80%);
+    --box-shadows: 0px 5px 5px rgba(0,0,0,0.2);
+    --text-shadows: 0px 2px 5px rgba(0,0,0,0.5);
 }
 
 body {
@@ -25,6 +28,7 @@ body {
 
 .text, a:visited, a:hover, a:active {
     color: rgba(var(--accent-color));
+    text-shadow: var(--text-shadows);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -60,6 +64,7 @@ body {
 #search-input {
     background: none;
     color: rgba(var(--accent-color));
+    text-shadow: var(--text-shadows);
     height: 100;
     width: 35vw;
     min-width: 300px;
@@ -96,9 +101,9 @@ body {
 
 #settings-menu {
     height: fit-content;
-    max-height: 60vh;
+    max-height: 90vh;
     margin-top: 10px;
-    padding: 10px 10px;
+    padding: 8px 10px;
     width: fit-content;
     border-radius: 0.75rem;
     background-color: rgba(var(--accent-color), 0.2);
@@ -178,9 +183,40 @@ body {
     color: rgba(var(--accent-color));
     background-color: rgba(var(--accent-color), 0.2);
     border-radius: 0.5rem;
-    border-color: rgba(var(--accent-color));
+    text-shadow: var(--text-shadows);
+    border-style: none;
     height: 26px;
     max-width: 150px;
+    text-overflow: hidden;
+}
+
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+#special-effects-checkbox {
+    width: 52px;
+    height: 26px;
+    background: rgba(var(--accent-color), 0.2);
+    position: relative;
+    border-radius: 0.75rem;
+}
+
+#special-effects-checkbox label {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 2rem;
+    transition: all .2s ease-out;
+    cursor: pointer;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: rgba(var(--accent-color));
+}
+
+#special-effects-checkbox input[type=checkbox]:checked + label {
+    left: 21px;
 }
 
 .credits {
@@ -206,4 +242,9 @@ body {
     object-fit: cover;
     border: none !important;
     outline: none !important;
+}
+
+.special-effects {
+    backdrop-filter: var(--blur-filter);
+    box-shadow: var(--box-shadows);
 }
