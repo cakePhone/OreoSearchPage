@@ -253,12 +253,7 @@ function setDefaultConfig() {
     localStorage.removeItem("searchEngine")
     localStorage.removeItem("username")
     localStorage.removeItem("useSpecialEffects")
-    accentInput.dispatchEvent(new Event("change"))
-    backgroundInput.dispatchEvent(new Event("change"))
-    imageAlignementSelect.dispatchEvent(new Event("change"))
-    searchEngineSelect.dispatchEvent(new Event("change"))
-    nicknameInput.dispatchEvent(new Event("change"))
-    specialEffectsCheck.dispatchEvent(new Event("change"))
+    location.reload()
 }
 
 // -----------------------MAIN-----------------------
