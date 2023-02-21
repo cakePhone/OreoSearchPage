@@ -93,6 +93,8 @@ body {
 #settings-button {
     height: 24px;
     width: 24px;
+    transition: all 500ms ease-out;
+    cursor: pointer;
 }
 
 .icons {
@@ -123,19 +125,21 @@ body {
     width: 100%;
 }
 
-#search-engines {
+.dropdowns {
     background-color: rgba(var(--accent-color), 0.2);
     outline: none;
     border: none;
     color: rgba(var(--accent-color));
     padding: 5px;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 .color-input {
     border: none !important;
     padding: 0px;
     width: 40px;
+    cursor: pointer;
 }
 
 .color-input::-webkit-color-swatch-wrapper, .color-input::-webkit-color-swatch {
@@ -161,6 +165,7 @@ body {
     background-color: rgba(var(--accent-color), 0.2);
     border: none;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 .button:active, .button:hover {

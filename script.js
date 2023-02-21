@@ -22,6 +22,7 @@ const nicknameInput = document.getElementById("nickname-input")
 const greetingsText = document.getElementById("greeting")
 const fileInput = document.getElementById('background-image-file')
 const backgroundImage = document.getElementById('background-image')
+const imageAlignementSelect = document.getElementById("bg-vertical-alignment")
 const specialEffectsCheck = document.getElementById("special-effects-checkbox-value")
 
 // Search Engines
@@ -62,10 +63,12 @@ function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
         document.getElementById("settings-menu").classList.remove("invisible")
         document.getElementById("settings-menu").classList.add("visible")
+        document.getElementById("settings-button").style.setProperty("transform", "rotate(360deg)")
         console.log("Settings opened")
     } else {
         document.getElementById("settings-menu").classList.remove("visible")
         document.getElementById("settings-menu").classList.add("invisible")
+        document.getElementById("settings-button").style.setProperty("transform", "rotate(0deg)")
         console.log("Settings closed")
     }
 }
@@ -183,6 +186,17 @@ function imageToBase64() {
     })
 }
 
+// Sets background image object-position property to selected value
+function imageAlignement() {
+    if(!localStorage.getItem("bgImgPos")) {localStorage.setItem("bgImgPos", "center")}
+    imageAlignementSelect.value = localStorage.getItem("bgImgPos")
+    backgroundImage.style.setProperty("object-position", localStorage.getItem("bgImgPos"))
+    imageAlignementSelect.addEventListener("change", () => {
+        backgroundImage.style.setProperty("object-position", imageAlignementSelect.value)
+        localStorage.setItem("bgImgPos", imageAlignementSelect.value)
+    })
+}
+
 // Removes set background image
 function removeBackground() {
     backgroundImage.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
@@ -191,6 +205,8 @@ function removeBackground() {
     fileInput.dispatchEvent(new Event("change"))
 }
 
+
+// Handles special effects switch
 function specialEffects() {
     if(storedSpecialEffects == null) {localStorage.setItem("useSpecialEffects", "true"); storedSpecialEffects = localStorage.getItem("useSpecialEffects")}
     switch(storedSpecialEffects) {
@@ -230,30 +246,32 @@ function specialEffects() {
 // !!! DANGER !!! Sets ALL values to default config
 function setDefaultConfig() {
     if(!confirm("Are you sure?")) return
-    accentInput.value = "#000000"
-    backgroundInput.value = "#ffffff"
-    searchEngineSelect.value = "google"
-    nicknameInput.value = ""
-    removeBackground()
+    localStorage.removeItem("accentColor")
+    localStorage.removeItem("backgroundColor")
+    localStorage.removeItem("backgroundImage")
+    localStorage.removeItem("bgImgPos")
+    localStorage.removeItem("searchEngine")
+    localStorage.removeItem("username")
+    localStorage.removeItem("useSpecialEffects")
     accentInput.dispatchEvent(new Event("change"))
     backgroundInput.dispatchEvent(new Event("change"))
+    imageAlignementSelect.dispatchEvent(new Event("change"))
     searchEngineSelect.dispatchEvent(new Event("change"))
     nicknameInput.dispatchEvent(new Event("change"))
     specialEffectsCheck.dispatchEvent(new Event("change"))
 }
 
-// Main functions. Gets called on page load.
-function onPageLoad() {
-    // Add event listener for "Enter" key presses
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode == 13) {search()}
-    });
+// -----------------------MAIN-----------------------
+// Add event listener for "Enter" key presses
+document.addEventListener("keypress", (event) => {
+    if(event.key == "Enter") { search() }
+})
 
-    // Call all settings related functions
-    accentColor()
-    backgroundColor()
-    searchEngine()
-    greetings()
-    imageToBase64()
-    specialEffects()
-}
+// Call all settings related functions
+accentColor()
+backgroundColor()
+searchEngine()
+greetings()
+imageToBase64()
+imageAlignement()
+specialEffects()

@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="assets/icons/favicon.png" type="image/png">
     <script src="script.js" defer></script>
 </head>
-<body id="background" onload="onPageLoad()">
+<body id="background">
     <div class="settings">
         <div id="settings-button" onclick="settingsToggle()">
             <svg class="icons" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,14 +28,22 @@
             </div>
             <div class="settings-items">
                 <p class="text settings-item-text">Background Image:</p>
-                <input class="settings-file-input special-effects text" type="file" name="background-image" id="background-image-file">
+                <input class="settings-file-input special-effects text button" type="file" name="background-image" id="background-image-file">
+            </div>
+            <div class="settings-items">
+                <p class="text settings-item-text">Background Vertical Alignement:</p>
+                <select class="special-effects text dropdowns" id="bg-vertical-alignment">
+                    <option value="top">Top</option>
+                    <option value="center">Center</option>
+                    <option value="bottom">Bottom</option>
+                </select>
             </div>
             <div class="settings-items">
                 <input class="button settings-button special-effects text" value="Remove background image" type="button" name="removeBackgroundImage" id="remove-background" onclick="removeBackground()">
             </div>
             <div class="settings-items">
                 <p class="text settings-item-text">Search Engine:</p>
-                <select class="special-effects text" name="search-engine" id="search-engines">
+                <select class="special-effects text dropdowns" id="search-engines">
                     <option value="google">Google</option>
                     <option value="duckduckgo">DuckDuckGo</option>
                     <option value="bing">Bing</option>
