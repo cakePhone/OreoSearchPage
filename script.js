@@ -63,7 +63,7 @@ function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
         document.getElementById("settings-menu").classList.remove("invisible")
         document.getElementById("settings-menu").classList.add("visible")
-        document.getElementById("settings-button").style.setProperty("transform", "rotate(360deg)")
+        document.getElementById("settings-button").style.setProperty("transform", "rotate(90deg)")
         console.log("Settings opened")
     } else {
         document.getElementById("settings-menu").classList.remove("visible")
@@ -275,3 +275,9 @@ greetings()
 imageToBase64()
 imageAlignement()
 specialEffects()
+
+// Trigger pop out animation
+for (var i = 1; i >= 0; i = i - 1) {
+    document.getElementsByClassName("popped-out")[i].classList.add("popped-in")
+    document.getElementsByClassName("popped-out")[i].classList.remove("popped-out")
+}

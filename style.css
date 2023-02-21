@@ -4,6 +4,7 @@
     --blur-filter: blur(20px) brightness(80%);
     --box-shadows: 0px 5px 5px rgba(0,0,0,0.2);
     --text-shadows: 0px 2px 5px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
 body {
@@ -17,13 +18,27 @@ body {
 .invisible {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 500ms, opacity 500ms ease-in-out;
+    transition: visibility 0s 200ms, opacity 500ms ease-out, transform 500ms ease-in-out;
+    transform: translateX(100vw);
 }
 
 .visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity 500ms ease-in-out;
+    transition: opacity 500ms ease-in, transform 500ms ease-in-out;
+}
+
+.popped-out {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(5vh);
+}
+
+.popped-in {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms 150ms ease, transform 300ms ease;
+    transform: translateY(0vh);
 }
 
 .text, a:visited, a:hover, a:active {
@@ -35,6 +50,7 @@ body {
 .greetings {
     margin-top: 30vh;
     margin-bottom: 5vh;
+    transition: all 500ms ease-in-out;
 }
 
 #greeting {
@@ -93,7 +109,7 @@ body {
 #settings-button {
     height: 24px;
     width: 24px;
-    transition: all 500ms ease-out;
+    transition: all 200ms ease-out;
     cursor: pointer;
 }
 
@@ -166,6 +182,7 @@ body {
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+    transition: all 200ms ease-in-out;
 }
 
 .button:active, .button:hover {
@@ -212,7 +229,7 @@ input[type=checkbox] {
     width: 18px;
     height: 18px;
     border-radius: 2rem;
-    transition: all .2s ease-out;
+    transition: all 200ms ease-out;
     cursor: pointer;
     position: absolute;
     top: 4px;
