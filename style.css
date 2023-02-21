@@ -262,8 +262,7 @@ input[type=checkbox] {
     left: 0px;
     z-index: -1;
     object-fit: cover;
-    border: none !important;
-    outline: none !important;
+    transition: all 200ms ease-out;
 }
 
 .special-effects {
