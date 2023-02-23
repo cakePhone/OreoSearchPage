@@ -148,18 +148,40 @@ function searchEngine() {
     }
 }
 
+backgroundImage.onload = greetings()
+
 // Handles the greetings text
 function greetings() {
     if(storednickname == null) {localStorage.setItem("username", ""); storednickname = localStorage.getItem("username")}
-    greetingsText.innerText = chooseGreeting(new Date().getHours())
+    writeGreeting(chooseGreeting(new Date().getHours()))
     nicknameInput.value = `${storednickname}`
     if(!nicknameEventListener) {
         nicknameInput.addEventListener("change", () => {
             localStorage.setItem("username", nicknameInput.value)
-            greetingsText.innerText = chooseGreeting(new Date().getHours())
+            writeGreeting(chooseGreeting(new Date().getHours()))
             console.log("Nickname changed")
         })
     }
+}
+
+// Make a cool typing effect for the Greeting
+function writeGreeting(text) {
+    greetingsText.innerHTML = "ㅤ" // Empty Text so the Search Bar doesn't glitch
+    const txt = text.split("")
+    txt.unshift("") // Wait 200 ms
+    txt.unshift("") 
+    txt.unshift("") // Wait total 600 ms before animation
+    for (let i = 0; i < txt.length; i++) {
+        setTimeout(() => {
+            if (i == 3){
+                greetingsText.innerHTML = "" // Remove the Empty Text Right before Writing
+            }
+            console.log(i)
+            greetingsText.innerHTML += txt[i];
+            console.log(txt[i])
+        }, 120 * i);        
+    }
+    console.log(txt);
 }
 
 // Helper function to determine the greeting to use
@@ -189,6 +211,7 @@ function imageToBase64() {
 
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0]
+        if (!file) return
         const reader = new FileReader()
         reader.onload = () => {
             backgroundImage.src = reader.result
@@ -279,7 +302,6 @@ document.addEventListener("keypress", (event) => {
 accentColor()
 backgroundColor()
 searchEngine()
-greetings()
 imageToBase64()
 imageAlignement()
 specialEffects()
