@@ -58,6 +58,19 @@ function search() {
     } else {window.location.href = searchEngines[searchEngine] + encodeURIComponent(inputValue)}
 }
 
+document.addEventListener('click', event => {
+    const isClickInside = document.getElementById("settings-menu").contains(event.target)
+    const isClickButton = document.getElementById("settings-button").contains(event.target)
+
+
+    if (!isClickInside && !isClickButton && document.getElementById("settings-menu").classList.contains("visible")) {
+        document.getElementById("settings-menu").classList.remove("visible")
+        document.getElementById("settings-menu").classList.add("invisible")
+        document.getElementById("settings-button").style.setProperty("transform", "rotate(0deg)")
+        console.log("Settings closed")
+    }
+})
+
 // Handles settings visibility
 function settingsToggle() {
     if (document.getElementById("settings-menu").classList.contains("invisible")) {
