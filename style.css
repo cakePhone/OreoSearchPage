@@ -19,7 +19,7 @@ body {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 200ms, opacity 500ms ease-out, transform 500ms ease-in-out;
-    transform: translateX(100vw);
+    transform: translateX(50vw);
 }
 
 .visible {
@@ -31,13 +31,13 @@ body {
 .popped-out {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(5vh);
+    transform: translateY(1vh);
 }
 
 .popped-in {
     visibility: visible;
     opacity: 1;
-    transition: opacity 300ms 150ms ease, transform 300ms ease;
+    transition: opacity 300ms 150ms ease, transform 500ms ease;
     transform: translateY(0vh);
 }
 
