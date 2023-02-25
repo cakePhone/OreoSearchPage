@@ -4,6 +4,7 @@ var backgroundInputEventListener
 var searchEngineInputEventListener
 var nicknameEventListener
 var specialEffectsListener
+var backgroundBlurListener
 
 // Local Storage variables
 var storedAccentColor = localStorage.getItem("accentColor")
@@ -12,6 +13,7 @@ var storedSearchEngine = localStorage.getItem("searchEngine")
 var storednickname = localStorage.getItem("username")
 var storedImage = localStorage.getItem("backgroundImage")
 var storedSpecialEffects = localStorage.getItem("useSpecialEffects")
+var storedBackgroundBlur = localStorage.getItem("backgroundBlur")
 
 // Element variables
 var root = document.querySelector(":root")
@@ -22,6 +24,7 @@ const nicknameInput = document.getElementById("nickname-input")
 const greetingsText = document.getElementById("greeting")
 const fileInput = document.getElementById('background-image-file')
 const backgroundImage = document.getElementById('background-image')
+const backgroundBlur = document.getElementById("background-blur")
 const imageAlignementSelect = document.getElementById("bg-vertical-alignment")
 const specialEffectsCheck = document.getElementById("special-effects-checkbox-value")
 
@@ -276,6 +279,28 @@ function specialEffects() {
             }
         })
         specialEffectsCheck.dispatchEvent(new Event("change"))
+        specialEffectsListener = true
+    }
+}
+
+// Handles Background Blur effect
+function setBackgroundBlur() {
+    if(storedBackgroundBlur == null) {
+        localStorage.setItem("backgroundBlur", "0")
+        storedBackgroundBlur = localStorage.getItem("backgroundBlur")
+    } else {
+        backgroundBlur.value = storedBackgroundBlur * 20
+    }
+    
+    if(!backgroundBlurListener) {
+        backgroundBlur.addEventListener("change", () => {
+            var bgBlurValue = backgroundBlur.value / 20
+            localStorage.setItem("backgroundBlur", bgBlurValue)
+            root.style.setProperty("--background-blur", bgBlurValue + "px")
+            console.log("Background Blur: " + bgBlurValue + "px")
+        })
+        backgroundBlur.dispatchEvent(new Event("change"))
+        backgroundBlurListener = true
     }
 }
 
@@ -289,6 +314,7 @@ function setDefaultConfig() {
     localStorage.removeItem("searchEngine")
     localStorage.removeItem("username")
     localStorage.removeItem("useSpecialEffects")
+    localStorage.removeItem("backgroundBlur")
     location.reload()
 }
 
@@ -301,6 +327,7 @@ document.addEventListener("keypress", (event) => {
 // Call all settings related functions
 accentColor()
 backgroundColor()
+setBackgroundBlur()
 searchEngine()
 imageToBase64()
 imageAlignement()
