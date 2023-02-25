@@ -56,6 +56,7 @@ main {
 .icons {
   color: rgba(var(--accent-color));
   font-size: 1.3rem;
+  transition: all 500ms ease;
 }
 
 #search-text {
@@ -100,6 +101,10 @@ main {
   border-radius: 1rem;
   background-color: rgb(var(--accent-color), 0.2);
   transition: all 500ms ease;
+}
+
+.rotated {
+  transform: rotate(-90deg);
 }
 
 .settings-opened {
