@@ -10,7 +10,7 @@ const app = Vue.createApp({
       ],
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       searchInput: "",
-      settingsOpen: false
+      settingsClosed: true
     }
   },
   methods: {
@@ -66,7 +66,7 @@ const app = Vue.createApp({
     },
 
     settingsToggle() {
-      this.settingsOpen = !this.settingsOpen
+      this.settingsClosed = !this.settingsClosed
     }
   },
   computed: {

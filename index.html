@@ -20,13 +20,19 @@
     <!--SETTINGS-->
     <div id="settings-container">
 
-      <i class="fa fa-cog icons" :class="{'rotated': settingsOpen}" @click="settingsToggle"></i>
+      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsToggle"></i>
 
-      <div :class="{'settings-opened': settingsOpen}" id="settings-menu">
+      <div :class="{'settings-closed': settingsClosed}" id="settings-menu">
         
-        <h3 class="text" id="settings-title">Settings</h3>
+        <h3 class="text settings-items" id="settings-title">Settings</h3>
 
-        <input id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+        <section class="settings-items">
+
+          <h4 class="text settings-items-text">Nickname</h4>
+
+          <input id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+          
+        </section>
 
       </div>
 

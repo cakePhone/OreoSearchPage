@@ -24,7 +24,7 @@ body {
 
 main {
   position: absolute;
-  top: 50%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -65,7 +65,7 @@ main {
   border: none;
   background: none;
   min-width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 0 0 0.8rem;
 }
 
@@ -94,7 +94,7 @@ main {
   flex-direction: column;
 
   max-height: 30rem;
-  width: 10rem;
+  max-width: 20rem;
   padding: 1rem;
   margin-top: 1rem;
 
@@ -103,10 +103,14 @@ main {
   transition: all 500ms ease;
 }
 
+.settings-items {
+  margin: 0 0 0.5rem 0;
+}
+
 .rotated {
   transform: rotate(-90deg);
 }
 
-.settings-opened {
+.settings-closed {
   transform: translateX(15rem);
 }
