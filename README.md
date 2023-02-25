@@ -1,6 +1,9 @@
 # OreoSearch
 OreoSearch is a simple home page for your basic non-ugly browser needs. Need your home page to sit flush with your top bar? I solved the issue!
 
+## Rewriting
+This page will be rewritten from the ground up, using vue and some other libraries. Feedback is appreaciated, wait for all the features to roll out meanwhile.
+
 ## Features
 OreoSearch has the following feautures:
 
