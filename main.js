@@ -80,7 +80,8 @@ const app = Vue.createApp({
     },
 
     nickname() {
-      return this.updateLocalStorage("username", this.inputNickname)
+      this.inputNickname = this.inputNickname.length > 33 ? this.inputNickname.slice(0, 30) + "..." : this.inputNickname
+      return this.updateLocalStorage("username", this.inputNickname.trim())
     }
   }
 })

@@ -24,13 +24,13 @@
 
       <div :class="{'settings-closed': settingsClosed}" id="settings-menu">
         
-        <h3 class="text settings-items" id="settings-title">Settings</h3>
+        <h2 class="text settings-items" id="settings-title">Settings</h2>
 
         <section class="settings-items">
 
           <h4 class="text settings-items-text">Nickname</h4>
 
-          <input id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+          <input class="settings-items-option text" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
           
         </section>
 
@@ -40,11 +40,7 @@
 
     <!--MAIN SEARCH/GREETINGS-->
     <main>
-      <div class="greetings">
-
-        <p class="text" id="greeting">{{ greeting }}</p>
-
-      </div>
+      <p class="text" id="greeting">{{ greeting }}</p>
 
       <div id="search-box-container">
 
