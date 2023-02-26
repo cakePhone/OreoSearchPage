@@ -10,34 +10,13 @@
   <!--Font awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!--App styles-->
-  <link rel="stylesheet" href="./assets/style.css">
+  <link rel="stylesheet" href="./assets/styles/main.css">
   <!--Favicon-->
   <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
 </head> 
 <body>
   <!--All the visible shenanigans go here-->
   <div id="app">
-    <!--SETTINGS-->
-    <div id="settings-container">
-
-      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsToggle"></i>
-
-      <div :class="{'settings-closed': settingsClosed}" id="settings-menu">
-        
-        <h2 class="text settings-items" id="settings-title">Settings</h2>
-
-        <section class="settings-items">
-
-          <h4 class="text settings-items-text">Nickname</h4>
-
-          <input class="settings-items-option text" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
-          
-        </section>
-
-      </div>
-
-    </div>
-
     <!--MAIN SEARCH/GREETINGS-->
     <main>
       <p class="text" id="greeting">{{ greeting }}</p>
@@ -50,6 +29,34 @@
 
       </div>
     </main>
+
+    <!--SETTINGS-->
+    <div id="settings-container">
+
+      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsToggle"></i>
+
+      <div :class="{'settings-closed': settingsClosed}" id="settings-menu">
+        
+        <h2 class="text" id="settings-title">Settings</h2>
+
+        <section class="settings-items">
+
+          <label for="nickname-input" class="text settings-items-text settings-options">Nickname</label>
+
+          <input class="settings-items-input-text-option text" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+          
+        </section>
+
+        <section class="settings-items">
+
+          <label for="accent-input" class="text settings-items-text">Accent color</label>
+
+          <input class="settings-items-color-option text" id="accent-input" type="color">
+          
+        </section>
+      </div>
+
+    </div>
     <!--Test Button to reset the Local Storage-->
     <input type="button" id="testreset" value="--TEST-- Reset LocalStorage" onclick="localStorage.clear(); location.reload()">
   </div>

@@ -10,6 +10,7 @@ const app = Vue.createApp({
       ],
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       searchInput: "",
+      accentColor: "",
       settingsClosed: true
     }
   },
@@ -38,6 +39,7 @@ const app = Vue.createApp({
     },
 
     updateLocalStorage(key, value) {
+      if(localStorage.getItem(key) === value) { return localStorage.getItem(key) }
       localStorage.setItem(key, value)
       console.log(`${key} was changed`)
       return localStorage.getItem(key)
@@ -80,8 +82,10 @@ const app = Vue.createApp({
     },
 
     nickname() {
-      this.inputNickname = this.inputNickname.length > 33 ? this.inputNickname.slice(0, 30) + "..." : this.inputNickname
+      this.inputNickname = this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname
       return this.updateLocalStorage("username", this.inputNickname.trim())
-    }
+    },
+
+
   }
 })
