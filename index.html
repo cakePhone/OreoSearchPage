@@ -21,11 +21,11 @@
     <main>
       <p class="text" id="greeting">{{ greeting }}</p>
 
-      <div id="search-box-container">
+      <div :class="{'focus': searchFocus}" id="search-box-container">
 
         <i class="fa fa-search icons"></i>
 
-        <input type="text" :placeholder="searchPlaceholder" id="search-text" v-on:keyup.enter="search" v-model="searchInput">
+        <input type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search" v-model="searchInput">
 
       </div>
     </main>
@@ -69,11 +69,20 @@
 
         <section class="settings-items">
 
-          <label for="accent-input" class="text settings-items-text">Accent color</label>
+          <label for="accent-input" class="text settings-items-text">Accent color: {{ accentColor }}</label>
 
           <input class="settings-items-color-option text" id="accent-input" type="color" v-model="accentColor">
           
         </section>
+
+        <section class="settings-items">
+
+          <label for="bacgkriund-input" class="text settings-items-text">Background color: {{ backgroundColor }}</label>
+
+          <input class="settings-items-color-option text" id="background-input" type="color" v-model="backgroundColor">
+          
+        </section>
+
       </div>
 
     </div>

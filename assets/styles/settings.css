@@ -48,29 +48,49 @@
   padding: 6px;
   margin: 0;
   width: 7rem;
+
+  cursor: pointer;
 }
 
-.settings-input-text-option:focus, .settings-items-input-text-option:hover {
+.settings-input-text-option:focus, .settings-input-text-option:hover {
   outline: none;
   background-color: rgba(var(--accent-color), 0.3);
-  font-size: 1rem;
+  transform: scale(1.1);
 }
 
 .settings-items-color-option {
   outline: none;
   border: none;
+
+  background: none;
+
   padding: 0;
   height: 1.5rem;
   width: 2rem;
+
+  cursor: pointer;
 }
 
 .settings-items-color-option:focus, .settings-items-color-option:hover {
-  height: 1.8rem;
-  width: 2.3rem;
+  transform: scale(1.2);
 }
 
 .settings-select-option {
   background-color: rgba(var(--accent-color), 0.2);
 
   border: none;
+  border-radius: 0.5rem;
+  outline: none;
+
+  padding: 6px;
+  margin: 0;
+  width: 7rem;
+
+  cursor: pointer;
+}
+
+.settings-select-option:hover {
+  outline: none;
+  background-color: rgba(var(--accent-color), 0.3);
+  transform: scale(1.1);
 }

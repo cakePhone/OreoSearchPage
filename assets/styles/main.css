@@ -67,8 +67,8 @@ main {
   border-radius: 1rem;
 }
 
-#search-box-container:hover, #search-box-container:focus {
-  scale: 1.05;
+.focus {
+  transform: scale(1.05);
   background-color: rgba(var(--accent-color), 0.3);
 }
 

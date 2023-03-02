@@ -8,16 +8,29 @@ const app = Vue.createApp({
         {"name": "Brave", "url": "https://search.brave.com/search?q="},
         {"name": "Ecosia", "url": "https://www.ecosia.org/search?method=index&q="}
       ],
+      settingsClosed: true,
+      searchFocus: false,
+      
+      searchInput: "",
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       accentColor: "#ffffff",
-      searchInput: "",
-      settingsClosed: true
+      backgroundColor: "#000000"
     }
   },
   mounted() {
     window.addEventListener("load", () => {
+
+      // Take care of colors at start
       this.updateAccentColor()
       document.querySelector("#accent-input").addEventListener("change", () => { this.updateAccentColor() })
+
+      this.updateBackgroundColor()
+      document.querySelector("#background-input").addEventListener("change", () => { this.updateBackgroundColor() })
+
+      // Handle main focus anim
+      document.querySelector("#search-text").addEventListener("focus", () => {
+        document.querySelector("#search-box-container").classList.add("focus")
+      })
     })
   },
   methods: {
@@ -74,6 +87,17 @@ const app = Vue.createApp({
       document.documentElement.style.setProperty("--accent-color", `${this.hexToRgb(this.accentColor).r},${this.hexToRgb(this.accentColor).g},${this.hexToRgb(this.accentColor).b}`)
     },
 
+    updateBackgroundColor() {
+      if(!localStorage.getItem("backgroundColor")) { localStorage.setItem("backgroundColor", "#000000") }
+      if(this.backgroundColor === "#ffffff") { this.backgroundColor = localStorage.getItem("backgroundColor") }
+      localStorage.setItem("backgroundColor", this.backgroundColor)
+
+      // console.log(this.hexToRgb(localStorage.getItem("backgroundColor")))
+
+      document.documentElement.style.setProperty("--background-color", `${this.hexToRgb(this.backgroundColor).r},${this.hexToRgb(this.backgroundColor).g},${this.hexToRgb(this.backgroundColor).b}`)
+
+    },
+
     search() {
       if (/^\s*$/.test(this.searchInput)) return
       const isValidUrl = urlString=> {
@@ -106,8 +130,8 @@ const app = Vue.createApp({
     greeting() { return `${this.greetings(this.nickname)}` },
 
     searchEngine() {
-      if(!localStorage.getItem("searchEngine")) {this.updateLocalStorage("searchEngine", "0")}
-      return this.searchEngines[this.updateLocalStorage("searchEngine")]
+      if(!localStorage.getItem("searchEngine")) {localStorage.setItem("searchEngine", "0")}
+      return this.searchEngines[localStorage.getItem("searchEngine")]
     },
 
     nickname() {
