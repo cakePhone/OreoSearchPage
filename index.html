@@ -41,17 +41,37 @@
 
         <section class="settings-items">
 
-          <label for="nickname-input" class="text settings-items-text settings-options">Nickname</label>
+          <label for="nickname-input" class="text settings-items-text">Nickname</label>
 
-          <input class="settings-items-input-text-option text" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+          <input class="settings-input-text-option text" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
           
+        </section>
+
+        <section class="settings-items">
+
+          <label for="search-engine-select" class="text settings-items-text">Search Engine</label>
+
+          <select class="settings-select-option text" id="search-engine-select">
+
+            <option value="Google">Google</option>
+
+            <option value="DuckDuckGo">DuckDuckGo</option>
+
+            <option value="Bing">Bing</option>
+
+            <option value="Brave">Brave</option>
+
+            <option value="Ecosia">Ecosia</option>
+
+          </select>
+
         </section>
 
         <section class="settings-items">
 
           <label for="accent-input" class="text settings-items-text">Accent color</label>
 
-          <input class="settings-items-color-option text" id="accent-input" type="color">
+          <input class="settings-items-color-option text" id="accent-input" type="color" v-model="accentColor">
           
         </section>
       </div>

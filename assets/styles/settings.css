@@ -19,7 +19,6 @@
 
   border-radius: 1rem;
   background-color: rgb(var(--accent-color), 0.2);
-  transition: all 500ms ease;
 }
 
 #settings-title {
@@ -40,7 +39,7 @@
   margin: 0 1rem 2px 0;
 }
 
-.settings-items-input-text-option {
+.settings-input-text-option {
   background-color: rgba(var(--accent-color), 0.2);
 
   border: none;
@@ -49,15 +48,12 @@
   padding: 6px;
   margin: 0;
   width: 7rem;
-  
-  transition: all 500ms ease;
 }
 
-.settings-items-input-text-option:focus, .settings-items-input-text-option:hover {
+.settings-input-text-option:focus, .settings-items-input-text-option:hover {
   outline: none;
   background-color: rgba(var(--accent-color), 0.3);
-  scale: 1.1;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .settings-items-color-option {
@@ -66,4 +62,15 @@
   padding: 0;
   height: 1.5rem;
   width: 2rem;
+}
+
+.settings-items-color-option:focus, .settings-items-color-option:hover {
+  height: 1.8rem;
+  width: 2.3rem;
+}
+
+.settings-select-option {
+  background-color: rgba(var(--accent-color), 0.2);
+
+  border: none;
 }

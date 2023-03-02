@@ -12,6 +12,7 @@
 
 * {
   box-sizing: border-box;
+  transition: all 500ms ease;
 }
 
 body {
@@ -32,7 +33,6 @@ body {
 .icons {
   color: rgba(var(--accent-color));
   font-size: 1.3rem;
-  transition: all 500ms ease;
 }
 
 /* Search/Greeting Styles */
@@ -65,6 +65,11 @@ main {
   width: 38rem;
   padding: 0.9rem 1rem;
   border-radius: 1rem;
+}
+
+#search-box-container:hover, #search-box-container:focus {
+  scale: 1.05;
+  background-color: rgba(var(--accent-color), 0.3);
 }
 
 #search-text {
