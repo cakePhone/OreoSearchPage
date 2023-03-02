@@ -17,8 +17,8 @@ const app = Vue.createApp({
       searchEngine: (localStorage.getItem("searchEngine")) ? localStorage.getItem("searchEngine") : "0",
 
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
-      accentColor: "#ffffff",
-      backgroundColor: "#000000"
+      accentColor: (localStorage.getItem("accentColor")) ? localStorage.getItem("accentColor") : "#ffffff",
+      backgroundColor: (localStorage.getItem("backgroundColor")) ? localStorage.getItem("backgroundColor") : "#000000"
     }
   },
 
@@ -79,7 +79,6 @@ const app = Vue.createApp({
 
     updateAccentColor() {
       if(!localStorage.getItem("accentColor")) { localStorage.setItem("accentColor", "#ffffff") }
-      if(this.accentColor === "#ffffff") { this.accentColor = localStorage.getItem("accentColor") }
       localStorage.setItem("accentColor", this.accentColor)
 
       // console.log(this.hexToRgb(localStorage.getItem("accentColor")))
@@ -89,7 +88,6 @@ const app = Vue.createApp({
 
     updateBackgroundColor() {
       if(!localStorage.getItem("backgroundColor")) { localStorage.setItem("backgroundColor", "#000000") }
-      if(this.backgroundColor === "#000000") { this.backgroundColor = localStorage.getItem("backgroundColor") }
       localStorage.setItem("backgroundColor", this.backgroundColor)
 
       // console.log(this.hexToRgb(localStorage.getItem("backgroundColor")))
