@@ -38,9 +38,9 @@ body {
 /* Search/Greeting Styles */
 main {
   position: absolute;
-  top: 42%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 32vh;
+  left: 50vw;
+  transform: translateX(-50vw);
 
   display: flex;
   flex-direction: column;

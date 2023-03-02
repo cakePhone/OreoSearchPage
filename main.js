@@ -1,4 +1,6 @@
 const app = Vue.createApp({
+
+  //! Put variables here
   data() {
     return {
       searchEngines: [
@@ -12,27 +14,25 @@ const app = Vue.createApp({
       searchFocus: false,
       
       searchInput: "",
+      searchEngine: (localStorage.getItem("searchEngine")) ? localStorage.getItem("searchEngine") : "0",
+
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       accentColor: "#ffffff",
       backgroundColor: "#000000"
     }
   },
+
+  //! Mounted
   mounted() {
     window.addEventListener("load", () => {
-
-      // Take care of colors at start
+      //* Take care of settings at start
       this.updateAccentColor()
-      document.querySelector("#accent-input").addEventListener("change", () => { this.updateAccentColor() })
-
       this.updateBackgroundColor()
-      document.querySelector("#background-input").addEventListener("change", () => { this.updateBackgroundColor() })
-
-      // Handle main focus anim
-      document.querySelector("#search-text").addEventListener("focus", () => {
-        document.querySelector("#search-box-container").classList.add("focus")
-      })
+      this.updateSearchEngine()
     })
   },
+
+  //! Methods
   methods: {
     greetings(username) {
       const timenow = new Date().getHours()
@@ -89,7 +89,7 @@ const app = Vue.createApp({
 
     updateBackgroundColor() {
       if(!localStorage.getItem("backgroundColor")) { localStorage.setItem("backgroundColor", "#000000") }
-      if(this.backgroundColor === "#ffffff") { this.backgroundColor = localStorage.getItem("backgroundColor") }
+      if(this.backgroundColor === "#000000") { this.backgroundColor = localStorage.getItem("backgroundColor") }
       localStorage.setItem("backgroundColor", this.backgroundColor)
 
       // console.log(this.hexToRgb(localStorage.getItem("backgroundColor")))
@@ -117,22 +117,30 @@ const app = Vue.createApp({
         } else {
           window.location.href = encodeURI("https://" + this.searchInput)
         }
-      } else { window.location.href = this.searchEngine.url + encodeURIComponent(this.searchInput) }
+      } else { window.location.href = this.searchEngines[this.searchEngine].url + encodeURIComponent(this.searchInput) }
     },
 
     settingsToggle() {
       this.settingsClosed = !this.settingsClosed
+    },
+
+    updateSearchEngine() {
+      console.log(!localStorage.getItem("searchEngine"))
+      if(!localStorage.getItem("searchEngine")) { localStorage.setItem("searchEngine", "0") }
+      localStorage.setItem("searchEngine", this.searchEngine)
     }
   },
+
+  //! Computed Values
   computed: {
-    searchPlaceholder() { return "Search with " + this.searchEngine.name },
+    searchPlaceholder() { return "Search with " + this.searchEngines[this.searchEngine].name },
 
     greeting() { return `${this.greetings(this.nickname)}` },
 
-    searchEngine() {
-      if(!localStorage.getItem("searchEngine")) {localStorage.setItem("searchEngine", "0")}
-      return this.searchEngines[localStorage.getItem("searchEngine")]
-    },
+    // searchEngine() {
+    //   if(!localStorage.getItem("searchEngine")) {localStorage.setItem("searchEngine", "0")}
+    //   return this.searchEngines[localStorage.getItem("searchEngine")]
+    // },
 
     nickname() {
       this.inputNickname = this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname
