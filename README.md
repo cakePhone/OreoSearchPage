@@ -4,6 +4,12 @@ OreoSearch is a simple home page for your basic non-ugly browser needs. Need you
 ## Rewriting
 This page will be rewritten from the ground up, using vue and some other libraries. Feedback is appreaciated, wait for all the features to roll out meanwhile.
 
+### Compatibility
+This rewriting is barely compatible with its vanilla js counterpart. To fix any issues, just reset your local (web) storage for the website.
+
+#### How to reset local (web) storage
+Go to dev tools (F12), go to the console and type "localStorage.clear()". Hit enter and reload the page. All done! Enjoy the smoother experience of Vue!
+
 ## Features
 OreoSearch has the following feautures:
 
