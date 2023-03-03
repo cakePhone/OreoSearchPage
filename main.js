@@ -144,6 +144,12 @@ const app = Vue.createApp({
       }
 
       reader.readAsDataURL(event.target.files[0])
+    },
+
+    resetToDefaults() {
+      if(!confirm("Are you sure you want to reset ALL your settings?")) return
+      localStorage.clear()
+      location.reload
     }
   },
 

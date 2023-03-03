@@ -117,3 +117,24 @@
   background-color: rgba(var(--accent-color), 0.3);
   transform: scale(1.1);
 }
+
+/*! Reset to defaults */
+#reset-to-defaults {
+  background-color: rgba(var(--accent-color), 0.2);
+
+  border: none;
+  border-radius: 0.5rem;
+
+  height: 1.5rem;
+  width: 90%;
+
+  margin-top: 1rem;
+  margin-left: 5%;
+}
+
+#reset-to-defaults:hover {
+  background-color: rgba(255,0,0,0.3);
+  color: red;
+
+  transform: scale(1.1);
+}
