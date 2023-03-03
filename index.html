@@ -18,7 +18,7 @@
   <!--All the visible shenanigans go here-->
   <div id="app">
     <!-- BACKGROUND IMAGE -->
-    <img src="">
+    <img :src="backgroundImage" id="background-image">
 
     <!--MAIN SEARCH/GREETINGS-->
     <main>
@@ -42,6 +42,7 @@
         
         <h2 class="text" id="settings-title">Settings</h2>
 
+        <!-- Nickname -->
         <section class="settings-items">
 
           <label for="nickname-input" class="text settings-items-text">Nickname</label>
@@ -50,6 +51,7 @@
           
         </section>
 
+        <!-- Search Engine -->
         <section class="settings-items">
 
           <label for="search-engine-select" class="text settings-items-text">Search Engine</label>
@@ -70,6 +72,7 @@
 
         </section>
 
+        <!-- Accent Color -->
         <section class="settings-items">
 
           <label for="accent-input" class="text settings-items-text">Accent color: {{ accentColor }}</label>
@@ -78,12 +81,24 @@
           
         </section>
 
+        <!-- Background Color-->
         <section class="settings-items">
 
-          <label for="bacgkriund-input" class="text settings-items-text">Background color: {{ backgroundColor }}</label>
+          <label for="background-input" class="text settings-items-text">Background color: {{ backgroundColor }}</label>
 
-          <input class="settings-items-color-option text" id="background-input" type="color" @change="updateBackgroundColor" v-model="backgroundColor">
+          <input class="settings-items-color-option text" id="background-input" @change="updateBackgroundColor" v-model="backgroundColor" type="color">
           
+        </section>
+
+        <!-- Background Image -->
+        <section class="settings-items">
+
+          <label for="background-image-input" class="text settings-items-text">Background Image</label>
+
+          <input class="settings-file-input" id="background-image-input" type="file" accept="image/*" @change="updateBackgroundImage">
+
+          <label for="background-image-input" class="text special-effects" id="background-image-input-styled">Choose a File</label>
+
         </section>
 
       </div>

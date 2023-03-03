@@ -94,3 +94,26 @@
   background-color: rgba(var(--accent-color), 0.3);
   transform: scale(1.1);
 }
+
+
+/*! Background Image Input */
+.settings-file-input {
+  display: none;
+}
+
+#background-image-input-styled {
+  padding: 6px;
+  width: 7rem;
+
+  border-radius: 0.5rem;
+
+  text-align: center;
+  font-size: 0.9rem;
+
+  background-color: rgba(var(--accent-color), 0.2);
+}
+
+#background-image-input-styled:hover {
+  background-color: rgba(var(--accent-color), 0.3);
+  transform: scale(1.1);
+}

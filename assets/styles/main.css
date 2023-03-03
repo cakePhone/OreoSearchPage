@@ -37,6 +37,19 @@ body {
   text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
 }
 
+#background-image {
+  object-fit: cover;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+  width: 100vw;
+
+  border: none;
+}
+
 /*! Search/Greeting Styles */
 main {
   position: absolute;
@@ -85,9 +98,14 @@ main {
   margin: 0 0 0 0.8rem;
 }
 
+#search-text::placeholder {
+  color: rgba(var(--accent-color), 0.5);
+  text-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
 #testreset{ 
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
 
   padding: 5px 10px;

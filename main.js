@@ -18,7 +18,8 @@ const app = Vue.createApp({
 
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       accentColor: (localStorage.getItem("accentColor")) ? localStorage.getItem("accentColor") : "#ffffff",
-      backgroundColor: (localStorage.getItem("backgroundColor")) ? localStorage.getItem("backgroundColor") : "#000000"
+      backgroundColor: (localStorage.getItem("backgroundColor")) ? localStorage.getItem("backgroundColor") : "#000000",
+      backgroundImage: (localStorage.getItem("backgroundImage")) ? `data:image/png;base64,${localStorage.getItem("backgroundImage")}` : "data:image/png;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
     }
   },
 
@@ -126,6 +127,23 @@ const app = Vue.createApp({
       console.log(!localStorage.getItem("searchEngine"))
       if(!localStorage.getItem("searchEngine")) { localStorage.setItem("searchEngine", "0") }
       localStorage.setItem("searchEngine", this.searchEngine)
+    },
+
+    updateBackgroundImage(event) {
+      if(!localStorage.getItem("backgroundImage")) { localStorage.setItem("backgroundImage", `data:image/png;base64,${localStorage.getItem("backgroungImage")}`) }
+      if(!event.target.files[0]) return
+
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        console.log(event.target.files[0].size)
+        if(event.target.files[0].size > 4.5 * 1000000) { alert("File is too big"); return }
+        this.backgroundImage = reader.result
+        const base64 = this.backgroundImage.split(",")[1]
+        localStorage.setItem("backgroundImage", base64)
+      }
+
+      reader.readAsDataURL(event.target.files[0])
     }
   },
 
@@ -135,14 +153,9 @@ const app = Vue.createApp({
 
     greeting() { return `${this.greetings(this.nickname)}` },
 
-    // searchEngine() {
-    //   if(!localStorage.getItem("searchEngine")) {localStorage.setItem("searchEngine", "0")}
-    //   return this.searchEngines[localStorage.getItem("searchEngine")]
-    // },
-
     nickname() {
       this.inputNickname = this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname
       return this.updateLocalStorage("username", this.inputNickname.trim())
-    },
+    }
   }
 })
