@@ -149,7 +149,7 @@ const app = Vue.createApp({
     resetToDefaults() {
       if(!confirm("Are you sure you want to reset ALL your settings?")) return
       localStorage.clear()
-      location.reload
+      location.reload()
     }
   },
 
