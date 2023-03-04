@@ -36,7 +36,7 @@
     <!--SETTINGS-->
     <div id="settings-container">
 
-      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsToggle"></i>
+      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsClosed = !settingsClosed"></i>
 
       <div class="special-effects" :class="{'settings-closed': settingsClosed}" id="settings-menu">
         
@@ -47,7 +47,7 @@
 
           <label for="nickname-input" class="text settings-items-text">Nickname</label>
 
-          <input class="settings-input-text-option text special-effects" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname">
+          <input class="settings-input-text-option text special-effects" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname" @input="updateNickname">
           
         </section>
 

@@ -58,11 +58,8 @@ const app = Vue.createApp({
       }
     },
 
-    updateLocalStorage(key, value) {
-      //if(localStorage.getItem(key) === value) { return localStorage.getItem(key) }
-      if(value || value === "") { localStorage.setItem(key, value) }
-      // console.log(`${key} was changed`)
-      return localStorage.getItem(key)
+    updateNickname() {
+      localStorage.setItem("username", this.inputNickname)
     },
 
     hexToRgb(hex) {
@@ -82,16 +79,12 @@ const app = Vue.createApp({
       if(!localStorage.getItem("accentColor")) { localStorage.setItem("accentColor", "#ffffff") }
       localStorage.setItem("accentColor", this.accentColor)
 
-      // console.log(this.hexToRgb(localStorage.getItem("accentColor")))
-
       document.documentElement.style.setProperty("--accent-color", `${this.hexToRgb(this.accentColor).r},${this.hexToRgb(this.accentColor).g},${this.hexToRgb(this.accentColor).b}`)
     },
 
     updateBackgroundColor() {
       if(!localStorage.getItem("backgroundColor")) { localStorage.setItem("backgroundColor", "#000000") }
       localStorage.setItem("backgroundColor", this.backgroundColor)
-
-      // console.log(this.hexToRgb(localStorage.getItem("backgroundColor")))
 
       document.documentElement.style.setProperty("--background-color", `${this.hexToRgb(this.backgroundColor).r},${this.hexToRgb(this.backgroundColor).g},${this.hexToRgb(this.backgroundColor).b}`)
 
@@ -119,12 +112,7 @@ const app = Vue.createApp({
       } else { window.location.href = this.searchEngines[this.searchEngine].url + encodeURIComponent(this.searchInput) }
     },
 
-    settingsToggle() {
-      this.settingsClosed = !this.settingsClosed
-    },
-
     updateSearchEngine() {
-      console.log(!localStorage.getItem("searchEngine"))
       if(!localStorage.getItem("searchEngine")) { localStorage.setItem("searchEngine", "0") }
       localStorage.setItem("searchEngine", this.searchEngine)
     },
@@ -157,11 +145,6 @@ const app = Vue.createApp({
   computed: {
     searchPlaceholder() { return "Search with " + this.searchEngines[this.searchEngine].name },
 
-    greeting() { return `${this.greetings(this.nickname)}` },
-
-    nickname() {
-      this.inputNickname = this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname
-      return this.updateLocalStorage("username", this.inputNickname.trim())
-    }
+    greeting() { return `${this.greetings(this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname.trim())}` },
   }
 })
