@@ -112,7 +112,13 @@ const app = Vue.createApp({
       if(!localStorage.getItem("accentColor")) { localStorage.setItem("accentColor", "#ffffff") }
       localStorage.setItem("accentColor", this.accentColor)
 
-      document.documentElement.style.setProperty("--accent-color", `${this.hexToRgb(this.accentColor).r},${this.hexToRgb(this.accentColor).g},${this.hexToRgb(this.accentColor).b}`)
+      let rgbAccentColor = `${this.hexToRgb(this.accentColor).r},${this.hexToRgb(this.accentColor).g},${this.hexToRgb(this.accentColor).b}`
+      let rgbTextColor = `${(this.hexToRgb(this.accentColor).r + 20 > 255) ? 255 : this.hexToRgb(this.accentColor).r + 20},
+                          ${(this.hexToRgb(this.accentColor).g + 20 > 255) ? 255 : this.hexToRgb(this.accentColor).g + 20},
+                          ${(this.hexToRgb(this.accentColor).b + 20 > 255) ? 255 : this.hexToRgb(this.accentColor).b + 20}`
+
+      document.documentElement.style.setProperty("--accent-color", rgbAccentColor)
+      document.documentElement.style.setProperty("--text-color", rgbTextColor)
     },
 
     updateBackgroundColor() {
