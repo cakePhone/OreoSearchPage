@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oreo Home Page</title>
-  <!--Vue-->
+  <!-- Vue -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <!--Font awesome-->
+  <!-- Font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!--App styles-->
+  <!-- App styles -->
   <link rel="stylesheet" href="./assets/styles/main.css">
-  <!--Favicon-->
+  <!-- Favicon -->
   <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
 </head> 
 <body>
@@ -21,17 +21,11 @@
     <img :src="backgroundImage" id="background-image">
 
     <!--MAIN SEARCH/GREETINGS-->
-    <main>
-      <p class="text" id="greeting">{{ greeting }}</p>
-
-      <div :class="{'focus': searchFocus}" class="special-effects" id="search-box-container">
-
-        <i class="fa fa-search icons"></i>
-
-        <input class="text" type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search" v-model="searchInput">
-
-      </div>
-    </main>
+    <search-greetings
+      :greeting="greeting"
+      :searchengines="searchEngines"
+      :searchengine="searchEngine">
+    </search-greetings>
 
     <!--SETTINGS-->
     <div id="settings-container">
@@ -107,15 +101,15 @@
 
     </div>
   </div>
-  <!--Main App script goes here-->
+  <!-- Main App script goes here -->
   <script src="./main.js"></script>
 
-  <!--Space for components, please do give them space, they're depresso-->
+  <!-- Components -->
+  <script src="./components/SearchAndGreetings.js"></script>
 
-
-  <!--Gotta mount app here-->
+  <!-- Mount App -->
   <script>
-    const mountedApp = app.mount("#app")
+    app.mount("#app")
   </script>
 </body>
 </html>

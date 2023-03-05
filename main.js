@@ -1,5 +1,4 @@
 const app = Vue.createApp({
-
   //! Put variables here
   data() {
     return {
@@ -10,11 +9,9 @@ const app = Vue.createApp({
         {"name": "Brave", "url": "https://search.brave.com/search?q="},
         {"name": "Ecosia", "url": "https://www.ecosia.org/search?method=index&q="}
       ],
-      settingsClosed: true,
-      searchFocus: false,
-      
-      searchInput: "",
       searchEngine: (localStorage.getItem("searchEngine")) ? localStorage.getItem("searchEngine") : "0",
+
+      settingsClosed: true,
 
       inputNickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       accentColor: (localStorage.getItem("accentColor")) ? localStorage.getItem("accentColor") : "#ffffff",
@@ -75,28 +72,6 @@ const app = Vue.createApp({
       }
     },
     
-    search() {
-      if (/^\s*$/.test(this.searchInput)) return
-      const isValidUrl = urlString=> {
-        var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
-        '(\\#[-a-z\\d_]*)?$','i') // validate fragment locator
-        
-        return !!urlPattern.test(urlString)
-      }
-
-      if (isValidUrl(this.searchInput)) {
-        if (this.searchInput.startsWith("https://") || this.searchInput.startsWith("http://")) {
-          window.location.href = this.searchInput
-        } else {
-          window.location.href = encodeURI("https://" + this.searchInput)
-        }
-      } else { window.location.href = this.searchEngines[this.searchEngine].url + encodeURIComponent(this.searchInput) }
-    },
-    
     //! All settings related methods
 
     updateNickname() {
@@ -154,8 +129,6 @@ const app = Vue.createApp({
 
   //! Computed Values
   computed: {
-    searchPlaceholder() { return "Search with " + this.searchEngines[this.searchEngine].name },
-
     greeting() { return `${this.greetings(this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname.trim())}` },
   }
 })
