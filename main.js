@@ -46,31 +46,6 @@ const app = Vue.createApp({
     rgbToHex(r, g, b) {
       return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)
     },
-
-    //! Main Experience Methods
-
-    greetings(username) {
-      const timenow = new Date().getHours()
-      let timeOfDayString
-      if(timenow < 7 || timenow > 19) {
-        timeOfDayString = "Good night"
-      }
-      else if(timenow < 12) {
-        timeOfDayString = "Good morning"
-      }
-      else if (timenow < 18) {
-        timeOfDayString = "Good afternoon"
-      }
-      else {
-        timeOfDayString = "Good evening"
-      }
-
-      if(username !== "") {
-        return `${timeOfDayString}, ${username}!`
-      } else {
-        return `${timeOfDayString}!`
-      }
-    },
     
     //! All settings related methods
 
@@ -125,10 +100,5 @@ const app = Vue.createApp({
       localStorage.clear()
       location.reload()
     }
-  },
-
-  //! Computed Values
-  computed: {
-    greeting() { return `${this.greetings(this.inputNickname.trim().length > 33 ? this.inputNickname.trim().slice(0, 30) + "..." : this.inputNickname.trim())}` },
   }
 })

@@ -1,13 +1,13 @@
 app.component("search-greetings", {
   props: {
-    greeting: {
-      type: String,
-      required: true
-    },
     searchengines: {
       required: true
     },
     searchengine: {
+      type: String,
+      required: true
+    },
+    nickname: {
       type: String,
       required: true
     }
@@ -38,6 +38,8 @@ app.component("search-greetings", {
 
   computed: {
     searchPlaceholder() { return "Search with " + this.searchengines[this.searchengine].name },
+
+    greeting() { return `${this.greetings(this.nickname.trim().length > 33 ? this.nickname.trim().slice(0, 30) + "..." : this.nickname.trim())}` }
   },
 
   methods: {
@@ -61,6 +63,29 @@ app.component("search-greetings", {
           window.location.href = encodeURI("https://" + this.searchInput)
         }
       } else { window.location.href = this.searchengines[this.searchengine].url + encodeURIComponent(this.searchInput) }
+    },
+
+    greetings(nickname) {
+      const hour = new Date().getHours()
+      let timeOfDayString
+      if(hour < 7 || hour > 19) {
+        timeOfDayString = "Good night"
+      }
+      else if(hour < 13) {
+        timeOfDayString = "Good morning"
+      }
+      else if (hour < 18) {
+        timeOfDayString = "Good afternoon"
+      }
+      else {
+        timeOfDayString = "Good evening"
+      }
+
+      if(nickname !== "") {
+        return `${timeOfDayString}, ${nickname}!`
+      } else {
+        return `${timeOfDayString}!`
+      }
     },
   },
 })
