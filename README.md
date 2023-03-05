@@ -17,7 +17,6 @@ OreoSearch has the following feautures:
   - Accent color for text and components
   - Background page color
   - Background image
-  - Special effects
 
 + 5 search engines and counting:
   - Google
