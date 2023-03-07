@@ -24,82 +24,18 @@
     <search-greetings
       :searchengines="searchEngines"
       :searchengine="searchEngine"
-      :nickname="inputNickname">
+      :nickname="nickname">
     </search-greetings>
 
     <!--SETTINGS-->
-    <div id="settings-container">
-
-      <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsClosed = !settingsClosed"></i>
-
-      <div class="special-effects" :class="{'settings-closed': settingsClosed}" id="settings-menu">
-        
-        <h2 class="text" id="settings-title">Settings</h2>
-
-        <!-- Nickname -->
-        <section class="settings-items">
-
-          <label for="nickname-input" class="text settings-items-text">Nickname</label>
-
-          <input class="settings-input-text-option text special-effects" id="nickname-input" type="text" placeholder="Nickname" v-model="inputNickname" @input="updateNickname">
-          
-        </section>
-
-        <!-- Search Engine -->
-        <section class="settings-items">
-
-          <label for="search-engine-select" class="text settings-items-text">Search Engine</label>
-
-          <select class="settings-select-option text special-effects" v-model="searchEngine" @change="updateSearchEngine" id="search-engine-select">
-
-            <option value="0">Google</option>
-
-            <option value="1">DuckDuckGo</option>
-
-            <option value="2">Bing</option>
-
-            <option value="3">Brave</option>
-
-            <option value="4">Ecosia</option>
-
-          </select>
-
-        </section>
-
-        <!-- Accent Color -->
-        <section class="settings-items">
-
-          <label for="accent-input" class="text settings-items-text">Accent color: {{ accentColor }}</label>
-
-          <input class="settings-items-color-option text" id="accent-input" type="color" @change="updateAccentColor" v-model="accentColor">
-          
-        </section>
-
-        <!-- Background Color-->
-        <section class="settings-items">
-
-          <label for="background-input" class="text settings-items-text">Background color: {{ backgroundColor }}</label>
-
-          <input class="settings-items-color-option text" id="background-input" @change="updateBackgroundColor" v-model="backgroundColor" type="color">
-          
-        </section>
-
-        <!-- Background Image -->
-        <section class="settings-items">
-
-          <label for="background-image-input" class="text settings-items-text">Background Image</label>
-
-          <input class="settings-file-input" id="background-image-input" type="file" accept="image/*" @change="updateBackgroundImage">
-
-          <label for="background-image-input" class="text special-effects" id="background-image-input-styled">Choose a File</label>
-
-        </section>
-
-        <button class="special-effects settinngs-items text" id="reset-to-defaults" @click="resetToDefaults">Reset to Defaults</button>
-
-      </div>
-
-    </div>
+    <settings
+      :nickname="nickname"
+      :searchengine="searchEngine"
+      :backgroundimage="backgroundImage"
+      @changed-nickname="(nick) => nickname = nick"
+      @changed-search-engine="(engine) => searchEngine = engine"
+      @changed-bg-image="(image) => backgroundImage = image">
+    </settings>
   </div>
 
   <!-- Main App script goes here -->
@@ -107,6 +43,7 @@
 
   <!-- Components -->
   <script src="./components/SearchAndGreetings.js"></script>
+  <script src="./components/Settings.js"></script>
 
   <!-- Mount App -->
   <script>
