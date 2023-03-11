@@ -26,6 +26,7 @@
 #settings-title {
   margin: 0 0 1.2rem 0;
   pointer-events: none;
+  user-select: none;
 }
 
 /*! Settings Sections */
@@ -42,6 +43,7 @@
 .settings-items-text {
   margin: 0 1rem 2px 0;
   font-weight: 700;
+  user-select: none;
 }
 
 /*! Text Inputs */
