@@ -28,13 +28,14 @@ main {
   flex-direction: row;
   background-color: rgba(var(--accent-color), 0.2);
   height: 3.2rem;
-  width: 38rem;
+  width: fit-content;
+  max-width: 80vw;
   padding: 0.9rem 1rem;
   border-radius: 1rem;
 }
 
 .focus {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   background-color: rgba(var(--accent-color), 0.3);
 }
 
