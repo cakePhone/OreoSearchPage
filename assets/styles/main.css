@@ -1,5 +1,5 @@
-@import url("./Settings.css");
-@import url("./SearchAndGreetings.css");
+@import url("./settings.css");
+@import url("./searchandgreetings.css");
 
 :root {
   --background-color: 0,0,0;
