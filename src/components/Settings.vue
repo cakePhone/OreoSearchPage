@@ -1,22 +1,7 @@
-app.component("settings", {
-  props: {
-    nickname: String,
-    searchengine: {
-      type: String,
-      required: true
-    },
-    backgroundimage: {
-      type: String,
-      required: true
-    }
-  },
-
-  template:
-  /*html*/
-  `
+<template>
   <div id="settings-container">
 
-    <i class="fa fa-cog icons" :class="{'rotated': settingsClosed}" @click="settingsClosed = !settingsClosed"></i>
+    <Icon :icon="['fas', 'cog']" class="icons" :class="{'rotated': settingsClosed}" @click="settingsClosed = !settingsClosed"></Icon>
 
     <div class="special-effects" :class="{'settings-closed': settingsClosed}" id="settings-menu">
         
@@ -84,10 +69,23 @@ app.component("settings", {
       <button class="special-effects settinngs-items text" id="reset-to-defaults" @click="resetToDefaults">Reset to Defaults</button>
 
     </div>
-
   </div>
-  `,
+</template>
 
+<script>
+export default {
+  name: 'Settings',
+  props: {
+    nickname: String,
+    searchengine: {
+      type: String,
+      required: true
+    },
+    backgroundimage: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       settingsClosed: true,
@@ -177,4 +175,5 @@ app.component("settings", {
       location.reload()
     }
   }
-})
+}
+</script>

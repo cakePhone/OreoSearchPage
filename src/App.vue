@@ -1,5 +1,29 @@
-const app = Vue.createApp({
-  //! Put global variables here
+<script setup>
+import Search from './components/SearchAndGreetings.vue'
+import Settings from './components/Settings.vue'
+</script>
+
+<template>
+  <img :src="backgroundImage" id="background-image"/>
+  <Search
+    :searchengines="searchEngines"
+    :searchengine="searchEngine"
+    :nickname="nickname"
+  ></Search>
+
+  <Settings
+    :nickname="nickname"
+    :searchengine="searchEngine"
+    :backgroundimage="backgroundImage"
+    @changed-nickname="(nick) => nickname = nick"
+    @changed-search-engine="(engine) => searchEngine = engine"
+    @changed-bg-image="(image) => backgroundImage = image"
+  ></Settings>
+</template>
+
+<script>
+export default {
+  name: 'App',
   data() {
     return {
       searchEngines: [
@@ -15,4 +39,5 @@ const app = Vue.createApp({
       backgroundImage: (localStorage.getItem("backgroundImage")) ? `data:image/png;base64,${localStorage.getItem("backgroundImage")}` : "data:image/png;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
     }
   }
-})
+}
+</script>

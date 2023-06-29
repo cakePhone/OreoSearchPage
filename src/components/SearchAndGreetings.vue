@@ -1,6 +1,23 @@
-app.component("search-greetings", {
+<template>
+  <main>
+    <p class="text" id="greeting">{{ greeting }}</p>
+
+    <div :class="{'focus': searchFocus}" class="special-effects" id="search-box-container">
+
+      <Icon :icon="['fas', 'search']" class="icons"></Icon>
+
+      <input class="text" type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search" v-model="searchInput">
+
+    </div>
+  </main>
+</template>
+
+<script>
+export default {
+  name: 'Search',
   props: {
     searchengines: {
+      type: Array,
       required: true
     },
     searchengine: {
@@ -12,23 +29,6 @@ app.component("search-greetings", {
       required: true
     }
   },
-
-  template:
-  /*html*/
-  `
-  <main>
-    <p class="text" id="greeting">{{ greeting }}</p>
-
-    <div :class="{'focus': searchFocus}" class="special-effects" id="search-box-container">
-
-      <i class="fa fa-search icons"></i>
-
-      <input class="text" type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search" v-model="searchInput">
-
-    </div>
-  </main>
-  `,
-
   data() {
     return {
       searchFocus: false,
@@ -87,5 +87,6 @@ app.component("search-greetings", {
         return `${timeOfDayString}!`
       }
     },
-  },
-})
+  }
+}
+</script>
