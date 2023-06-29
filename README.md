@@ -2,7 +2,9 @@
 OreoSearch is a simple home page for your basic non-ugly browser needs. Need your home page to sit flush with your top bar? I solved the issue!
 
 ## Rewriting
-This page will be rewritten from the ground up, using vue and some other libraries. Feedback is appreaciated, wait for all the features to roll out meanwhile.
+~~This page will be rewritten from the ground up, using vue and some other libraries. Feedback is appreaciated, wait for all the features to roll out meanwhile.~~
+
+This page was rewritten using vue and npm. Feedback is still appreciated as I start rolling out new features.
 
 ### Compatibility
 This rewriting is barely compatible with its vanilla js counterpart. To fix any issues, just reset your local (web) storage for the website.
@@ -30,8 +32,13 @@ OreoSearch has the following feautures:
 To request features, open an issue or contact me:
 + Telegram: https://t.me/OrioOreo
 
+## TODO
+
+- [] Bookmarks
+- [] Recents
+
 ## Use
-You can use this search page like any other. To access the different features, just click the settings button in the top right corner. Enjoy!
+You can use this home page like any other. To access the different features, just click the settings button in the top right corner. Enjoy!
 
 ## Installation
 ### Firefox
