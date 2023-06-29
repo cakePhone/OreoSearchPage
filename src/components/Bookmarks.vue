@@ -39,7 +39,6 @@ export default {
   justify-content: center;
 
   margin-top: 4rem;
-  border: 1px solid white !important;
 
   flex-wrap: wrap;
 }
