@@ -38,6 +38,12 @@ export default {
       nickname: (localStorage.getItem("username")) ? localStorage.getItem("username") : "",
       backgroundImage: (localStorage.getItem("backgroundImage")) ? `data:image/png;base64,${localStorage.getItem("backgroundImage")}` : "data:image/png;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA"
     }
+  },
+
+  mounted() {
+    window.addEventListener('contextmenu', (e) => {
+      e.preventDefault()
+    })
   }
 }
 </script>

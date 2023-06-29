@@ -32,6 +32,8 @@ main {
   max-width: 80vw;
   padding: 0.9rem 1rem;
   border-radius: 1rem;
+
+  overflow: hidden;
 }
 
 .focus {
@@ -45,5 +47,16 @@ main {
   background: none;
   min-width: 34rem;
   font-size: 16px;
-  margin: 0 0 0 0.8rem;
+  margin: 0 2rem 0 0.8rem;
+}
+
+#add-bookmark {
+  position: absolute;
+  right: -1rem;
+  opacity: 0;
+}
+
+.show-add-bookmark {
+  right: 1rem !important;
+  opacity: 1 !important;
 }

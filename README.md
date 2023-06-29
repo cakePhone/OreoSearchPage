@@ -35,6 +35,8 @@ To request features, open an issue or contact me:
 ## TODO
 
 - [ ] Bookmarks
+  - [x] Bookmarks
+  - [ ] Bookmark Icons
 - [ ] Recents
 
 ## Use

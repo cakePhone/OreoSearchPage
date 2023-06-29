@@ -1,3 +1,7 @@
+<script setup>
+import Bookmarks from './Bookmarks.vue'
+</script>
+
 <template>
   <main>
     <p class="text" id="greeting">{{ greeting }}</p>
@@ -6,9 +10,16 @@
 
       <Icon :icon="['fas', 'search']" class="icons"></Icon>
 
-      <input class="text" type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search" v-model="searchInput">
+      <input class="text" type="text" :placeholder="searchPlaceholder" id="search-text" @focus="searchFocus = true" @blur="searchFocus = false" @keyup.enter="search(searchInput)" v-model="searchInput">
+
+      <Icon :icon="['fas', 'plus']" class="icons" id="add-bookmark" :class="{'show-add-bookmark': searchInput}" @click="addBookmark()"></Icon>
 
     </div>
+    <Bookmarks
+      :searchFunc="search"
+      :bookmarks="bookmarks"
+      @removedBookmarks="updateBookmarks"
+    ></Bookmarks>
   </main>
 </template>
 
@@ -32,7 +43,8 @@ export default {
   data() {
     return {
       searchFocus: false,
-      searchInput: ""
+      searchInput: "",
+      bookmarks: localStorage.getItem('bookmarks') ? JSON.parse(localStorage.getItem('bookmarks')) : []
     }
   },
 
@@ -43,8 +55,8 @@ export default {
   },
 
   methods: {
-    search() {
-      if (/^\s*$/.test(this.searchInput)) return
+    search(input) {
+      if (/^\s*$/.test(input)) return
       const isValidUrl = urlString=> {
         var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
@@ -56,13 +68,13 @@ export default {
         return !!urlPattern.test(urlString)
       }
 
-      if (isValidUrl(this.searchInput)) {
-        if (this.searchInput.startsWith("https://") || this.searchInput.startsWith("http://")) {
-          window.location.href = this.searchInput
+      if (isValidUrl(input)) {
+        if (input.startsWith("https://") || input.startsWith("http://")) {
+          window.location.href = input
         } else {
-          window.location.href = encodeURI("https://" + this.searchInput)
+          window.location.href = encodeURI("https://" + input)
         }
-      } else { window.location.href = this.searchengines[this.searchengine].url + encodeURIComponent(this.searchInput) }
+      } else { window.location.href = this.searchengines[this.searchengine].url + encodeURIComponent(input) }
     },
 
     greetings(nickname) {
@@ -87,6 +99,24 @@ export default {
         return `${timeOfDayString}!`
       }
     },
+
+    addBookmark() {
+      if(!localStorage.getItem('bookmarks')) localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
+
+      this.bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
+
+      let bookmarkName = window.prompt('Name the bookmark:', 'Bookmark')
+
+      if(bookmarkName === null) return
+      if(!bookmarkName) bookmarkName = this.searchInput
+
+      this.bookmarks.push({name: bookmarkName, url: this.searchInput})
+      localStorage.setItem('bookmarks', JSON.stringify(this.bookmarks))
+    },
+
+    updateBookmarks() {
+      this.bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
+    }
   }
 }
 </script>
