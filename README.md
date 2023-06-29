@@ -34,8 +34,8 @@ To request features, open an issue or contact me:
 
 ## TODO
 
-- [] Bookmarks
-- [] Recents
+- [ ] Bookmarks
+- [ ] Recents
 
 ## Use
 You can use this home page like any other. To access the different features, just click the settings button in the top right corner. Enjoy!
