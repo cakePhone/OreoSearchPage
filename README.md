@@ -29,6 +29,8 @@ OreoSearch has the following feautures:
 
 + Greetings! The page will gladly greet you. Set your username in the settings!
 
++ Bookmarks! The page has bookmarks now! Simply type a url on the search bar and click the <kbd>+</kbd> icon on the right side and input the bookmark name! To remove it, just right click it.
+
 To request features, open an issue or contact me:
 + Telegram: https://t.me/OrioOreo
 
