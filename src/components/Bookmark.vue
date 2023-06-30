@@ -1,7 +1,7 @@
 <template>
   <div class="bookmark" :data-index="bookmark">
     <div class="bookmark-box special-effects" @click="navigate(url)" @contextmenu="removeBookmark(bookmark)">
-      <p class="text initial">{{ this.bookmarks[this.bookmark].name ? this.bookmarks[this.bookmark].name.slice(0,1) : '' }}</p>
+      <p class="text initial">{{ this.bookmarks[this.bookmark].name ? this.bookmarks[this.bookmark].name.slice(0,1).toUpperCase() : '' }}</p>
     </div>
     <p class="text bookmark-title">{{ this.bookmarks[this.bookmark].name ? this.bookmarks[this.bookmark].name : 'Add Bookmark' }}</p>
   </div>

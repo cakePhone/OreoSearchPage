@@ -9,7 +9,7 @@ import Bookmark from './Bookmark.vue'
       :bookmark="bookmarks.indexOf(bookmark)"
       :searchengine="searchengine"
       :searchengines="searchengines"
-      @removedBookmarks="this.$emit('updateBookmarks')"
+      @removedBookmarks="updateB"
     ></Bookmark>
   </div>
 </template>
@@ -30,6 +30,11 @@ export default {
       type: String,
       required: true
     },
+  },
+  methods: {
+    updateB() {
+      this.$emit('updateBookmarks')
+    }
   }
 }
 </script>
