@@ -16,9 +16,10 @@ import Bookmarks from './Bookmarks.vue'
 
     </div>
     <Bookmarks
-      :searchFunc="search"
       :bookmarks="bookmarks"
-      @removedBookmarks="updateBookmarks"
+      :searchengine="searchengine"
+      :searchengines="searchengines"
+      @updateBookmarks="updateBookmarks"
     ></Bookmarks>
   </main>
 </template>

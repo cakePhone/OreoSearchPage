@@ -7,8 +7,9 @@ import Bookmark from './Bookmark.vue'
     <Bookmark v-for="bookmark in bookmarks"
       :bookmarks="bookmarks"
       :bookmark="bookmarks.indexOf(bookmark)"
-      :searchFunc="searchFunc"
-      @removedBookmarks="this.$emit('removedBookmarks')"
+      :searchengine="searchengine"
+      :searchengines="searchengines"
+      @removedBookmarks="this.$emit('updateBookmarks')"
     ></Bookmark>
   </div>
 </template>
@@ -17,17 +18,23 @@ import Bookmark from './Bookmark.vue'
 export default {
   name: 'Bookmarks',
   props: {
-    searchFunc: {
-      type: Function
-    },
     bookmarks: {
       type: Array,
       required: true
-    }
+    },
+    searchengines: {
+      type: Array,
+      required: true
+    },
+    searchengine: {
+      type: String,
+      required: true
+    },
   }
 }
 </script>
 
+// TODO: FIX INDEXING
 <style scoped>
 #bookmarks-container {
   height: fit-content;
