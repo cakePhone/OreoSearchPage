@@ -106,6 +106,8 @@ export default {
 
       this.bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
 
+      if(this.bookmarks.length >= 8) { window.alert('You can only have up to 8 bookmarks, for now'); return }
+
       let bookmarkName = window.prompt('Name the bookmark:', 'Bookmark')
 
       if(bookmarkName === null) return
