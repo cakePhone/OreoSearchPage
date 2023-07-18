@@ -39,7 +39,6 @@ export default {
 }
 </script>
 
-// TODO: FIX INDEXING
 <style scoped>
 #bookmarks-container {
   height: fit-content;
